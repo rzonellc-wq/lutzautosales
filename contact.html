@@ -3,281 +3,1614 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="_style.css">
-<title>Contact Lutz Auto Sales | (813) 727-6111 | 17604 N US Hwy 41 Lutz FL</title>
-<meta name="description" content="Contact Lutz Auto Sales at (813) 727-6111. Visit us at 17604 N US Highway 41, Unit 1, Lutz FL 33549. Mon-Fri 10am-5:30pm, Sat 9am-12pm. Serving all of Tampa Bay.">
-<!-- SEO & Performance -->
-<meta name="author" content="Lutz Auto Sales">
-<meta name="geo.region" content="US-FL">
-<meta name="geo.placename" content="Lutz, Florida">
-<meta name="geo.position" content="28.1394;-82.4593">
-<meta name="ICBM" content="28.1394, -82.4593">
-<meta name="theme-color" content="#C41230">
+<title>Lutz Auto Sales — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1E; --navy-mid: #1C2333; --navy-light: #2A3450;
+    --silver: #C8D8E8; --amber: #E8A020; --amber-light: #F5C060;
+    --white: #F8F9FC; --text-muted: #7A8BA0; --card-bg: #141929;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white); min-height: 100vh; }
 
-<!-- Open Graph -->
-<meta property="og:site_name" content="Lutz Auto Sales">
-<meta property="og:locale" content="en_US">
-<meta property="og:type" content="website">
+  /* TOP BAR */
+  .topbar {
+    background: rgba(10,15,30,0.97); border-bottom: 1px solid rgba(200,216,232,0.1);
+    padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .topbar-logo { font-family: 'Barlow Condensed',sans-serif; font-size: 1.4rem; font-weight: 900; }
+  .topbar-logo span { color: var(--amber); }
+  .topbar-badge { background: rgba(232,160,32,0.15); color: var(--amber); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.25rem 0.75rem; border-radius: 20px; border: 1px solid rgba(232,160,32,0.3); text-transform: uppercase; }
+  .topbar-right { display: flex; align-items: center; gap: 1rem; }
+  .topbar-time { font-size: 0.78rem; color: var(--text-muted); }
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@lutzcars">
+  /* LAYOUT */
+  .admin-layout { display: flex; min-height: calc(100vh - 60px); }
 
-<!-- Local Business Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AutoDealer",
-  "@id": "https://www.lutzcars.com/#dealer",
-  "name": "Lutz Auto Sales",
-  "alternateName": "Lutz Cars",
-  "url": "https://www.lutzcars.com",
-  "logo": "https://cdn.powersports.com/cdn-cgi/image/h=540,w=720/A7F889EDA6964462608D85D22B4E9021.png",
-  "image": "https://cdn.powersports.com/cdn-cgi/image/h=540,w=720/A7F889EDA6964462608D85D22B4E9021.png",
-  "description": "Lutz Auto Sales is a trusted used car dealership in Lutz, FL specializing in quality pre-owned vehicles, Toyota Prius, and hybrid cars. All credit welcome. Carfax on every vehicle.",
-  "telephone": "+18137276111",
-  "email": "sales@lutzcars.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "17604 N US Highway 41, Unit 1",
-    "addressLocality": "Lutz",
-    "addressRegion": "FL",
-    "postalCode": "33549",
-    "addressCountry": "US"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 28.1394,
-    "longitude": -82.4593
-  },
-  "openingHoursSpecification": [
-    {"@type":"OpeningHoursSpecification","dayOfWeek":"Monday","opens":"10:00","closes":"17:30"},
-    {"@type":"OpeningHoursSpecification","dayOfWeek":"Tuesday","opens":"10:00","closes":"17:30"},
-    {"@type":"OpeningHoursSpecification","dayOfWeek":"Wednesday","opens":"12:00","closes":"17:30"},
-    {"@type":"OpeningHoursSpecification","dayOfWeek":"Thursday","opens":"12:00","closes":"17:30"},
-    {"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"10:00","closes":"17:30"},
-    {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"12:00"}
-  ],
-  "priceRange": "$4,990 - $19,990",
-  "paymentAccepted": "Cash, Check, Financing",
-  "currenciesAccepted": "USD",
-  "areaServed": [
-    {"@type":"City","name":"Lutz","sameAs":"https://en.wikipedia.org/wiki/Lutz,_Florida"},
-    {"@type":"City","name":"Tampa","sameAs":"https://en.wikipedia.org/wiki/Tampa,_Florida"},
-    {"@type":"City","name":"Wesley Chapel"},
-    {"@type":"City","name":"Land O Lakes"},
-    {"@type":"City","name":"New Tampa"},
-    {"@type":"City","name":"Carrollwood"},
-    {"@type":"City","name":"Odessa"}
-  ],
-  "hasMap": "https://maps.google.com/?q=17604+N+US+Hwy+41+Lutz+FL+33549",
-  "sameAs": [
-    "https://www.lutzcars.com",
-    "https://www.facebook.com/lutzcars",
-    "https://www.google.com/maps/place/Lutz+Auto+Sales"
-  ]
-}
-</script>
+  /* SIDEBAR */
+  .sidebar {
+    width: 220px; background: var(--navy-mid); border-right: 1px solid rgba(200,216,232,0.07);
+    padding: 1.5rem 0; flex-shrink: 0; position: sticky; top: 60px; height: calc(100vh - 60px); overflow-y: auto;
+  }
+  .sidebar-section { margin-bottom: 1.5rem; }
+  .sidebar-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; color: var(--text-muted); text-transform: uppercase; padding: 0 1.25rem; margin-bottom: 0.5rem; }
+  .sidebar-item {
+    display: flex; align-items: center; gap: 0.65rem;
+    padding: 0.65rem 1.25rem; font-size: 0.85rem; font-weight: 500; color: var(--silver);
+    cursor: pointer; transition: all 0.15s; border-left: 3px solid transparent;
+  }
+  .sidebar-item:hover { background: rgba(200,216,232,0.05); color: var(--white); }
+  .sidebar-item.active { background: rgba(232,160,32,0.08); color: var(--amber); border-left-color: var(--amber); font-weight: 600; }
+  .sidebar-icon { font-size: 1rem; width: 20px; text-align: center; }
+  .sidebar-count { margin-left: auto; background: var(--amber); color: var(--navy); font-size: 0.65rem; font-weight: 800; padding: 0.1rem 0.45rem; border-radius: 10px; }
 
-<!-- FAQ Schema for Homepage -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Does Lutz Auto Sales accept bad credit?",
-      "acceptedAnswer": {"@type":"Answer","text":"Yes! At Lutz Auto Sales we welcome all credit types — good credit, bad credit, and no credit. We work with multiple lenders to find financing solutions that work for your budget."}
-    },
-    {
-      "@type": "Question",
-      "name": "Do all cars at Lutz Auto Sales come with a Carfax report?",
-      "acceptedAnswer": {"@type":"Answer","text":"Yes, every vehicle at Lutz Auto Sales comes with a full Carfax vehicle history report. We believe in transparent pricing and no surprises."}
-    },
-    {
-      "@type": "Question",
-      "name": "Where is Lutz Auto Sales located?",
-      "acceptedAnswer": {"@type":"Answer","text":"Lutz Auto Sales is located at 17604 N US Highway 41, Unit 1, Lutz, FL 33549. We serve Tampa, Wesley Chapel, Land O Lakes, Carrollwood, and all of Tampa Bay."}
-    },
-    {
-      "@type": "Question",
-      "name": "What are Lutz Auto Sales business hours?",
-      "acceptedAnswer": {"@type":"Answer","text":"Monday, Tuesday, Friday: 10am-5:30pm. Wednesday, Thursday: 12pm-5:30pm. Saturday: 9am-12pm. Sunday: Closed."}
-    },
-    {
-      "@type": "Question",
-      "name": "Does Lutz Auto Sales specialize in Toyota Prius?",
-      "acceptedAnswer": {"@type":"Answer","text":"Yes! Lutz Auto Sales specializes in Toyota Prius and hybrid vehicles. We carry one of the largest selections of pre-owned Prius vehicles in the Tampa Bay area."}
-    }
-  ]
-}
-</script>
+  /* MAIN */
+  .main { flex: 1; padding: 2rem; overflow-x: auto; }
 
-<!-- Breadcrumb Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type":"ListItem","position":1,"name":"Home","item":"https://www.lutzcars.com/"},
-    {"@type":"ListItem","position":2,"name":"Inventory","item":"https://www.lutzcars.com/inventory.html"},
-    {"@type":"ListItem","position":3,"name":"Apply for Financing","item":"https://www.lutzcars.com/credit-application.html"}
-  ]
-}
-</script>
+  /* PAGE HEADER */
+  .page-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+  .page-title { font-family: 'Barlow Condensed',sans-serif; font-size: 2rem; font-weight: 800; }
+  .page-sub { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem; }
 
-<!-- Preconnect for performance -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn05.carsforsale.com">
-<link rel="preconnect" href="https://cdn.powersports.com">
-<link rel="dns-prefetch" href="https://partnerstatic.carfax.com">
+  /* PANELS */
+  .panel { display: none; }
+  .panel.active { display: block; }
 
-<meta property="og:title" content="Contact Lutz Auto Sales | (813) 727-6111 | 17604 N US Hwy 41 Lutz FL">
-<meta property="og:description" content="Contact Lutz Auto Sales at (813) 727-6111. Visit us at 17604 N US Highway 41, Unit 1, Lutz FL 33549. Mon-Fri 10am-5:30pm, Sat 9am-12pm. Serving all of Tampa Bay.">
+  /* STAT CARDS */
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .stat-card { background: var(--card-bg); border-radius: 10px; padding: 1.25rem; border: 1px solid rgba(200,216,232,0.08); }
+  .stat-card-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .stat-card-num { font-family: 'Barlow Condensed',sans-serif; font-size: 2.2rem; font-weight: 900; line-height: 1; }
+  .stat-card-lbl { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.3rem; }
+  .stat-card-delta { font-size: 0.72rem; margin-top: 0.5rem; }
+  .delta-up { color: #38C87A; } .delta-down { color: #F07070; }
 
-</head><body><div class="top-bar">
-  <div style="display:flex;gap:1.5rem;flex-wrap:wrap">
-    <span>📍 17604 N US Hwy 41 Unit 1, Lutz FL 33549</span>
-    <span>🕐 Mon-Fri 10am-5:30pm · Sat 9am-12pm · Sun Closed</span>
-  </div>
-  <div style="display:flex;gap:1.5rem">
-    <a href="tel:8137276111">📞 (813) 727-6111</a>
-    <a href="mailto:sales@lutzcars.com">✉️ sales@lutzcars.com</a>
+  /* BUTTONS */
+  .btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.05em; padding: 0.55rem 1.1rem; border-radius: 5px; border: none; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
+  .btn-amber { background: var(--amber); color: var(--navy); }
+  .btn-amber:hover { background: var(--amber-light); }
+  .btn-outline { background: transparent; color: var(--silver); border: 1px solid rgba(200,216,232,0.2); }
+  .btn-outline:hover { border-color: var(--amber); color: var(--amber); }
+  .btn-danger { background: transparent; color: #F07070; border: 1px solid rgba(220,60,60,0.3); }
+  .btn-danger:hover { background: rgba(220,60,60,0.1); }
+  .btn-green { background: rgba(56,200,122,0.15); color: #38C87A; border: 1px solid rgba(56,200,122,0.3); }
+
+  /* FORM ELEMENTS */
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  .form-group label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: var(--navy-light); color: var(--white); border: 1px solid rgba(200,216,232,0.15);
+    border-radius: 5px; padding: 0.65rem 0.9rem; font-size: 0.88rem; font-family: 'Inter',sans-serif;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--amber); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+
+  /* SECTION CARD */
+  .section-card { background: var(--card-bg); border-radius: 12px; border: 1px solid rgba(200,216,232,0.08); margin-bottom: 1.5rem; overflow: hidden; }
+  .section-card-header { padding: 1.1rem 1.5rem; border-bottom: 1px solid rgba(200,216,232,0.08); display: flex; align-items: center; justify-content: space-between; }
+  .section-card-title { font-family: 'Barlow Condensed',sans-serif; font-size: 1.1rem; font-weight: 700; }
+  .section-card-body { padding: 1.5rem; }
+
+  /* VIN BOX */
+  .vin-box { background: var(--navy-mid); border: 1.5px solid rgba(232,160,32,0.3); border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem; }
+  .vin-row { display: flex; gap: 0.75rem; align-items: flex-end; flex-wrap: wrap; }
+  .vin-input { flex: 1; min-width: 200px; background: var(--navy-light); color: var(--white); border: 1px solid rgba(200,216,232,0.2); border-radius: 5px; padding: 0.75rem 1rem; font-size: 1rem; font-family: 'Inter',sans-serif; letter-spacing: 0.06em; font-weight: 600; }
+  .vin-input:focus { outline: none; border-color: var(--amber); }
+  .vin-result { margin-top: 1rem; background: rgba(56,200,122,0.07); border: 1px solid rgba(56,200,122,0.25); border-radius: 8px; padding: 1rem; display: none; }
+  .vin-result-header { font-size: 0.82rem; font-weight: 700; color: #38C87A; margin-bottom: 0.75rem; }
+  .vin-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+  .vin-tag { background: var(--navy-mid); border-radius: 6px; padding: 0.4rem 0.75rem; }
+  .vin-tag-label { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .vin-tag-value { font-size: 0.82rem; font-weight: 600; }
+  .vin-status { margin-top: 0.75rem; font-size: 0.83rem; padding: 0.6rem 1rem; border-radius: 5px; display: none; }
+  .vin-status.loading { background: rgba(200,216,232,0.08); color: var(--silver); }
+  .vin-status.error { background: rgba(220,60,60,0.1); color: #F07070; }
+
+  /* EMOJI PICKER */
+  .emoji-picker { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.35rem; }
+  .emoji-opt { background: var(--navy-light); border: 1px solid rgba(200,216,232,0.15); border-radius: 6px; padding: 0.4rem 0.8rem; cursor: pointer; font-size: 0.85rem; transition: all 0.15s; user-select: none; }
+  .emoji-opt:hover { border-color: var(--amber); }
+  .emoji-opt.active { background: rgba(232,160,32,0.15); border-color: var(--amber); color: var(--amber); }
+
+  /* CRM TABLE */
+  .crm-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; min-width: 900px; }
+  .crm-table th { text-align: left; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; padding: 0.65rem 0.75rem; border-bottom: 1px solid rgba(200,216,232,0.1); white-space: nowrap; }
+  .crm-table td { padding: 0.8rem 0.75rem; border-bottom: 1px solid rgba(200,216,232,0.06); vertical-align: middle; }
+  .crm-table tr:hover td { background: rgba(200,216,232,0.025); }
+  .crm-badge { font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .crm-badge.hot  { background: rgba(220,60,60,0.2);  color: #F07070; }
+  .crm-badge.warm { background: rgba(232,160,32,0.2); color: var(--amber); }
+  .crm-badge.cold { background: rgba(100,160,220,0.2);color: #80B0E0; }
+  .crm-badge.sold { background: rgba(56,200,122,0.2); color: #38C87A; }
+  .crm-action-btn { background: var(--navy-light); border: 1px solid rgba(200,216,232,0.12); color: var(--silver); font-size: 0.7rem; font-weight: 600; padding: 0.28rem 0.55rem; border-radius: 4px; cursor: pointer; transition: all 0.15s; margin-right: 0.25rem; }
+  .crm-action-btn:hover { border-color: var(--amber); color: var(--amber); }
+  .crm-select { background: var(--navy-light); color: var(--white); border: 1px solid rgba(200,216,232,0.12); border-radius: 4px; padding: 0.28rem 0.5rem; font-size: 0.75rem; font-family: 'Inter',sans-serif; cursor: pointer; }
+  .crm-note { background: var(--navy-light); color: var(--white); border: 1px solid rgba(200,216,232,0.12); border-radius: 4px; padding: 0.28rem 0.55rem; font-size: 0.75rem; font-family: 'Inter',sans-serif; width: 130px; }
+  .crm-note:focus, .crm-select:focus { outline: none; border-color: var(--amber); }
+  .filter-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .filter-tab { background: var(--navy-mid); color: var(--silver); font-size: 0.72rem; font-weight: 600; padding: 0.35rem 0.9rem; border-radius: 20px; border: 1px solid rgba(200,216,232,0.1); cursor: pointer; transition: all 0.15s; }
+  .filter-tab.active, .filter-tab:hover { background: var(--amber); color: var(--navy); border-color: var(--amber); }
+  .crm-empty { text-align: center; padding: 3rem; color: var(--text-muted); font-size: 0.9rem; }
+  .crm-stats-mini { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.75rem; margin-bottom: 1.25rem; }
+  .crm-mini-box { background: var(--navy-mid); border-radius: 8px; padding: 0.85rem; border: 1px solid rgba(200,216,232,0.07); text-align: center; }
+  .crm-mini-num { font-family: 'Barlow Condensed',sans-serif; font-size: 1.6rem; font-weight: 800; }
+  .crm-mini-lbl { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* CALCULATOR */
+  .calc-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .calc-field { margin-bottom: 1.25rem; }
+  .calc-field-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .calc-field-label { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .calc-field-val { font-family: 'Barlow Condensed',sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--amber); }
+  input[type=range] { width: 100%; appearance: none; height: 4px; background: var(--navy-light); border-radius: 2px; outline: none; cursor: pointer; }
+  input[type=range]::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--amber); cursor: pointer; box-shadow: 0 0 0 3px rgba(232,160,32,0.2); }
+  .calc-result-box { background: var(--navy-mid); border-radius: 12px; border: 1px solid rgba(232,160,32,0.2); padding: 2rem; text-align: center; position: sticky; top: 80px; }
+  .calc-big { font-family: 'Barlow Condensed',sans-serif; font-size: 3.5rem; font-weight: 900; color: var(--amber); line-height: 1; }
+  .calc-sub { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem; margin-bottom: 1.5rem; }
+  .calc-row { display: flex; justify-content: space-between; font-size: 0.82rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(200,216,232,0.06); }
+  .calc-row span:first-child { color: var(--text-muted); }
+  .calc-row.total { font-weight: 700; border-bottom: none; padding-top: 0.75rem; }
+  .calc-row.total span:last-child { color: var(--amber); }
+
+  /* INVENTORY TABLE */
+  .inv-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; min-width: 800px; }
+  .inv-table th { text-align: left; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; padding: 0.65rem 0.75rem; border-bottom: 1px solid rgba(200,216,232,0.1); }
+  .inv-table td { padding: 0.8rem 0.75rem; border-bottom: 1px solid rgba(200,216,232,0.06); vertical-align: middle; }
+  .inv-table tr:hover td { background: rgba(200,216,232,0.025); }
+  .status-badge { font-size: 0.65rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 10px; text-transform: uppercase; }
+  .status-badge.new  { background: rgba(56,200,122,0.2); color: #38C87A; }
+  .status-badge.used { background: rgba(200,216,232,0.15); color: var(--silver); }
+  .status-badge.certified { background: rgba(100,160,220,0.2); color: #80B0E0; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: #38C87A; color: #fff; font-size: 0.88rem; font-weight: 600; padding: 0.75rem 1.5rem; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); display: none; z-index: 9999; animation: toastIn 0.3s ease; }
+  @keyframes toastIn { from { opacity:0; transform: translateX(-50%) translateY(10px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }
+
+  /* SEARCH */
+  .search-input { background: var(--navy-light); color: var(--white); border: 1px solid rgba(200,216,232,0.15); border-radius: 5px; padding: 0.55rem 1rem; font-size: 0.85rem; font-family: 'Inter',sans-serif; width: 220px; }
+  .search-input:focus { outline: none; border-color: var(--amber); }
+
+  /* RESPONSIVE */
+  @media(max-width:768px) {
+    .sidebar { display: none; }
+    .form-row, .form-row-3 { grid-template-columns: 1fr; }
+    .calc-layout { grid-template-columns: 1fr; }
+    .crm-stats-mini { grid-template-columns: 1fr 1fr; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD LOCK SCREEN -->
+<div id="lock-screen" style="position:fixed;inset:0;z-index:99999;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:1rem">
+  <div style="background:var(--card-bg);border-radius:16px;border:1px solid rgba(232,160,32,0.25);max-width:400px;width:100%;padding:2.5rem;text-align:center">
+    <div style="font-size:3rem;margin-bottom:1rem">🔐</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:900;margin-bottom:0.25rem">LUTZ <span style="color:var(--amber)">AUTO SALES</span></div>
+    <div style="font-size:0.72rem;color:var(--amber);font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.75rem">Admin Panel — Restricted Access</div>
+    <div style="margin-bottom:1rem;text-align:left">
+      <label style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:0.4rem">Password</label>
+      <input id="pw-input" type="password" placeholder="Enter admin password"
+        style="width:100%;background:var(--navy-light);color:var(--white);border:1px solid rgba(200,216,232,0.2);border-radius:6px;padding:0.8rem 1rem;font-size:1rem;font-family:'Inter',sans-serif;letter-spacing:0.1em"
+        onkeydown="if(event.key==='Enter') checkPassword()">
+    </div>
+    <div id="pw-error" style="display:none;color:#F07070;font-size:0.8rem;margin-bottom:0.75rem;background:rgba(220,60,60,0.1);padding:0.5rem;border-radius:5px">
+      ❌ Incorrect password. Try again.
+    </div>
+    <div id="pw-locked" style="display:none;color:#F07070;font-size:0.8rem;margin-bottom:0.75rem;background:rgba(220,60,60,0.1);padding:0.5rem;border-radius:5px">
+      🔒 Too many attempts. Please wait <span id="lockdown-timer">30</span> seconds.
+    </div>
+    <button onclick="checkPassword()" style="width:100%;background:var(--amber);color:var(--navy);font-size:0.95rem;font-weight:800;letter-spacing:0.06em;padding:0.9rem;border-radius:6px;border:none;cursor:pointer;text-transform:uppercase;transition:background 0.2s">
+      🔓 Login
+    </button>
+    <p style="font-size:0.7rem;color:var(--text-muted);margin-top:1rem">This panel is for authorized staff only.<br>Unauthorized access is prohibited.</p>
   </div>
 </div>
-<nav>
-  <div class="nav-inner">
-    <a href="index.html"><img src="https://cdn.powersports.com/cdn-cgi/image/h=540,w=720/A7F889EDA6964462608D85D22B4E9021.png" alt="Lutz Auto Sales" style="height:65px;object-fit:contain;padding:0.4rem 0"></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li>
-        <a href="inventory.html">Inventory ▾</a>
-        <div class="dropdown">
-          <a href="inventory.html">All Inventory</a>
-          <a href="inventory.html?make=Toyota">Toyota</a>
-          <a href="inventory.html?make=Honda">Honda</a>
-          <a href="inventory.html?make=Acura">Acura</a>
-          <a href="inventory.html?make=Ford">Ford</a>
-          <a href="inventory.html?make=Nissan">Nissan</a>
-          <a href="inventory.html?make=Cadillac">Cadillac</a>
-          <a href="inventory.html?make=Hyundai">Hyundai</a>
-          <a href="inventory.html?make=Mercedes-Benz">Mercedes-Benz</a>
-          <a href="inventory.html?make=Subaru">Subaru</a>
-        </div>
-      </li>
-      <li><a href="credit-application.html">Loan Application</a></li>
-      <li><a href="value-my-trade.html">Value My Trade</a></li>
-      <li><a href="prius-services.html">Prius Services</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <a class="nav-cta" href="credit-application.html">Apply Now</a>
-  </div>
-</nav>
 
-<div class="page-hero"><h1>Contact Us</h1><p>We'd love to hear from you</p></div>
-<div class="breadcrumb"><a href="index.html">Home</a> › Contact Us</div>
-<div class="container">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem">
-    <div>
-      <div class="section-title">Get In Touch</div>
-      <div style="margin-bottom:2rem">
-        <div style="display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:1.25rem">
-          <span style="font-size:1.5rem;margin-top:0.1rem">📍</span>
-          <div><strong style="display:block;margin-bottom:0.25rem">Our Location</strong><a href="https://maps.google.com/?q=17604+N+US+Hwy+41+Lutz+FL" target="_blank" style="color:#C41230;font-size:0.88rem">17604 N US Highway 41, Unit 1<br>Lutz, FL 33549</a></div>
-        </div>
-        <div style="display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:1.25rem">
-          <span style="font-size:1.5rem">📞</span>
-          <div><strong style="display:block;margin-bottom:0.25rem">Phone</strong><a href="tel:8137276111" style="color:#C41230;font-size:0.88rem">(813) 727-6111</a></div>
-        </div>
-        <div style="display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:1.25rem">
-          <span style="font-size:1.5rem">✉️</span>
-          <div><strong style="display:block;margin-bottom:0.25rem">Email</strong><a href="mailto:sales@lutzcars.com" style="color:#C41230;font-size:0.88rem">sales@lutzcars.com</a></div>
-        </div>
-      </div>
-      <div class="section-title">Business Hours</div>
-      <table style="width:100%;border-collapse:collapse;font-size:0.88rem" id="hours-table">
-        <tr><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;font-weight:600">Sunday</td><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;color:#555;text-align:right">Closed</td></tr>
-        <tr><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;font-weight:600">Monday</td><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;color:#555;text-align:right">10:00 AM – 5:30 PM</td></tr>
-        <tr><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;font-weight:600">Tuesday</td><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;color:#555;text-align:right">10:00 AM – 5:30 PM</td></tr>
-        <tr><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;font-weight:600">Wednesday</td><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;color:#555;text-align:right">12:00 PM – 5:30 PM</td></tr>
-        <tr><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;font-weight:600">Thursday</td><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;color:#555;text-align:right">12:00 PM – 5:30 PM</td></tr>
-        <tr><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;font-weight:600">Friday</td><td style="padding:0.5rem 0;border-bottom:1px solid #e0e0e0;color:#555;text-align:right">10:00 AM – 5:30 PM</td></tr>
-        <tr><td style="padding:0.5rem 0;font-weight:600">Saturday</td><td style="padding:0.5rem 0;color:#555;text-align:right">9:00 AM – 12:00 PM</td></tr>
-      </table>
-      <div style="margin-top:1.5rem;border-radius:4px;overflow:hidden;border:1px solid #e0e0e0">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3517.5!2d-82.4590!3d28.1394!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2c0f6e3b4b3b3%3A0x0!2zMjjCsDA4JzIwLjQiTiA4MsKwMjcnMzIuNCJX!5e0!3m2!1sen!2sus!4v1234567890" width="100%" height="300" style="border:0;display:block" loading="lazy"></iframe>
-      </div>
-    </div>
-    <div>
-      <div class="card">
-        <div class="card-header">Send Us a Message</div>
-        <div class="card-body">
-          <div class="form-row"><div class="form-group"><label>First Name <span class="req">*</span></label><input id="c-first" type="text" placeholder="Maria"></div><div class="form-group"><label>Last Name</label><input id="c-last" type="text" placeholder="Garcia"></div></div>
-          <div class="form-group"><label>Email <span class="req">*</span></label><input id="c-email" type="email" placeholder="maria@email.com"></div>
-          <div class="form-group"><label>Phone</label><input id="c-phone" type="tel" placeholder="(813) 555-0100"></div>
-          <div class="form-group"><label>Message</label><textarea id="c-msg" placeholder="How can we help you?"></textarea></div>
-          <p style="font-size:0.72rem;color:#888;margin-bottom:0.85rem;line-height:1.6">By clicking Send, I consent to be contacted by Lutz Auto Sales at any email or phone number I provide.</p>
-          <button class="btn-red" onclick="submitContact()" style="width:100%;padding:0.85rem">Send Message</button>
-          <div id="c-success" style="display:none;text-align:center;padding:1rem;color:green;font-weight:600;margin-top:0.75rem">✅ Thanks! We'll get back to you shortly.</div>
-        </div>
-      </div>
-    </div>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:1rem">
+    <div class="topbar-logo">LUTZ <span>AUTO SALES</span></div>
+    <div class="topbar-badge">⚙️ Admin Panel</div>
+  </div>
+  <div class="topbar-right">
+    <span class="topbar-time" id="live-time"></span>
+    <a href="index.html" style="font-size:0.78rem;color:var(--text-muted);text-decoration:none;border:1px solid rgba(200,216,232,0.15);padding:0.35rem 0.75rem;border-radius:4px;">← Back to Site</a>
+    <button onclick="logout()" style="font-size:0.78rem;color:#F07070;background:transparent;border:1px solid rgba(220,60,60,0.3);padding:0.35rem 0.75rem;border-radius:4px;cursor:pointer">🔒 Logout</button>
   </div>
 </div>
-<script>
-function submitContact(){
-  const f=document.getElementById('c-first').value.trim();
-  const e=document.getElementById('c-email').value.trim();
-  if(!f||!e){alert('Please fill in your name and email.');return;}
-  document.getElementById('c-success').style.display='block';
-  ['c-first','c-last','c-email','c-phone','c-msg'].forEach(id=>document.getElementById(id).value='');
-}
-const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const today=days[new Date().getDay()];
-document.querySelectorAll('#hours-table tr').forEach(tr=>{
-  if(tr.querySelector('td')?.textContent===today){
-    tr.style.color='#C41230';tr.style.fontWeight='700';
-    tr.querySelectorAll('td').forEach(td=>td.style.color='#C41230');
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Main</div>
+      <div class="sidebar-item active" onclick="showPanel('dashboard',this)"><span class="sidebar-icon">📊</span> Dashboard</div>
+      <div class="sidebar-item" onclick="showPanel('inventory',this)"><span class="sidebar-icon">🚗</span> Inventory <span class="sidebar-count" id="inv-count">6</span></div>
+      <div class="sidebar-item" onclick="showPanel('add-vehicle',this)"><span class="sidebar-icon">➕</span> Add Vehicle</div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Customers</div>
+      <div class="sidebar-item" onclick="showPanel('crm',this)"><span class="sidebar-icon">👥</span> CRM — Leads <span class="sidebar-count" id="lead-count">0</span></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Tools</div>
+      <div class="sidebar-item" onclick="showPanel('calculator',this)"><span class="sidebar-icon">🧮</span> Loan Calculator</div>
+      <div class="sidebar-item" onclick="showPanel('vin',this)"><span class="sidebar-icon">🔍</span> VIN Decoder</div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Config</div>
+      <div class="sidebar-item" onclick="showPanel('ai-reply',this)"><span class="sidebar-icon">🤖</span> AI Auto-Reply</div>
+      <div class="sidebar-item" onclick="showPanel('settings',this)"><span class="sidebar-icon">⚙️</span> Email & SMS Setup</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- ── DASHBOARD ── -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Dashboard</div>
+          <div class="page-sub">Welcome back. Here's what's happening today.</div>
+        </div>
+        <button class="btn btn-amber" onclick="showPanel('add-vehicle',document.querySelector('.sidebar-item:nth-child(3)'))">➕ Add Vehicle</button>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-card-icon">🚗</div>
+          <div class="stat-card-num" id="dash-inv">6</div>
+          <div class="stat-card-lbl">Vehicles in Stock</div>
+          <div class="stat-card-delta delta-up">↑ 2 added this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">👥</div>
+          <div class="stat-card-num" id="dash-leads">0</div>
+          <div class="stat-card-lbl">Total Leads</div>
+          <div class="stat-card-delta" id="dash-hot-lbl" style="color:var(--text-muted)">0 hot leads</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">✅</div>
+          <div class="stat-card-num" id="dash-sold">0</div>
+          <div class="stat-card-lbl">Sold This Month</div>
+          <div class="stat-card-delta delta-up" style="color:var(--text-muted)">Track via CRM</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">💰</div>
+          <div class="stat-card-num">$38k</div>
+          <div class="stat-card-lbl">Avg. Vehicle Price</div>
+          <div class="stat-card-delta delta-up">↑ from $35k</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;flex-wrap:wrap">
+        <div class="section-card">
+          <div class="section-card-header">
+            <div class="section-card-title">🔥 Hot Leads</div>
+            <button class="btn btn-outline" onclick="showPanel('crm',null)" style="font-size:0.72rem;padding:0.35rem 0.75rem">View All</button>
+          </div>
+          <div class="section-card-body" id="dash-hot-leads">
+            <div class="crm-empty" style="padding:1.5rem">No leads yet. They appear here when customers click "I'm Interested".</div>
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">🚗 Recent Inventory</div></div>
+          <div class="section-card-body" id="dash-recent-inv"></div>
+        </div>
+      </div>
+
+      <div class="section-card" style="margin-top:1.5rem">
+        <div class="section-card-header"><div class="section-card-title">⚡ Quick Actions</div></div>
+        <div class="section-card-body" style="display:flex;gap:1rem;flex-wrap:wrap">
+          <button class="btn btn-amber" onclick="showPanel('add-vehicle',null)">➕ Add New Vehicle</button>
+          <button class="btn btn-outline" onclick="showPanel('vin',null)">🔍 Decode a VIN</button>
+          <button class="btn btn-outline" onclick="showPanel('calculator',null)">🧮 Loan Calculator</button>
+          <button class="btn btn-outline" onclick="showPanel('crm',null)">👥 View All Leads</button>
+          <button class="btn btn-green" onclick="exportCSV()">⬇️ Export Leads CSV</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── INVENTORY ── -->
+    <div class="panel" id="panel-inventory">
+      <div class="page-header">
+        <div><div class="page-title">Inventory</div><div class="page-sub">All vehicles currently listed on your website.</div></div>
+        <div style="display:flex;gap:0.75rem;align-items:center">
+          <input class="search-input" type="text" placeholder="🔍 Search inventory..." oninput="searchInventory(this.value)">
+          <button class="btn btn-amber" onclick="showPanel('add-vehicle',null)">➕ Add Vehicle</button>
+        </div>
+      </div>
+      <div class="section-card">
+        <div style="overflow-x:auto">
+          <table class="inv-table" id="inv-table">
+            <thead><tr><th>Vehicle</th><th>Year</th><th>Price</th><th>Mileage</th><th>Status</th><th>Engine</th><th>Actions</th></tr></thead>
+            <tbody id="inv-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ADD VEHICLE ── -->
+    <div class="panel" id="panel-add-vehicle">
+      <div class="page-header">
+        <div><div class="page-title">Add Vehicle</div><div class="page-sub">Decode a VIN to auto-fill, then complete the listing.</div></div>
+      </div>
+
+      <!-- VIN DECODER INLINE -->
+      <div class="section-card">
+        <div class="section-card-header"><div class="section-card-title">🔍 VIN Decoder — Auto-Fill</div><span style="font-size:0.75rem;color:var(--text-muted)">Powered by NHTSA Database (Free)</span></div>
+        <div class="section-card-body">
+          <div class="vin-box">
+            <div class="vin-row">
+              <input id="vin-input" class="vin-input" type="text" maxlength="17" placeholder="Enter 17-character VIN (e.g. 1HGBH41JXMN109186)" oninput="this.value=this.value.toUpperCase()">
+              <button class="btn btn-amber" onclick="decodeVIN()">🔍 Decode VIN</button>
+            </div>
+            <div id="vin-status" class="vin-status"></div>
+            <div id="vin-result" class="vin-result">
+              <div class="vin-result-header">✅ VIN Decoded Successfully</div>
+              <div class="vin-tags" id="vin-tags"></div>
+              <button class="btn btn-green" onclick="fillFormFromVIN()">⬇️ Auto-Fill Form Below</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VEHICLE FORM -->
+      <div class="section-card">
+        <div class="section-card-header"><div class="section-card-title">📋 Vehicle Details</div></div>
+        <div class="section-card-body">
+          <div class="form-row">
+            <div class="form-group"><label>Make *</label><input id="a-make" type="text" placeholder="Toyota"></div>
+            <div class="form-group"><label>Model *</label><input id="a-model" type="text" placeholder="Camry XSE"></div>
+          </div>
+          <div class="form-row-3">
+            <div class="form-group"><label>Year *</label><input id="a-year" type="number" placeholder="2025"></div>
+            <div class="form-group"><label>Body Type</label>
+              <select id="a-type"><option>Sedan</option><option>SUV</option><option>Truck</option><option>Coupe</option><option>Minivan</option><option>Convertible</option><option>Wagon</option></select>
+            </div>
+            <div class="form-group"><label>Status</label>
+              <select id="a-status"><option value="new">New</option><option value="used">Used</option><option value="certified">Certified Pre-Owned</option></select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Engine</label><input id="a-engine" type="text" placeholder="2.5L 4-Cylinder"></div>
+            <div class="form-group"><label>Transmission</label><input id="a-trans" type="text" placeholder="Automatic 8-Speed"></div>
+          </div>
+          <div class="form-row-3">
+            <div class="form-group"><label>Horsepower</label><input id="a-hp" type="number" placeholder="203"></div>
+            <div class="form-group"><label>Seats</label><input id="a-seats" type="number" placeholder="5"></div>
+            <div class="form-group"><label>MPG (City/Hwy)</label><input id="a-mpg" type="text" placeholder="28/39"></div>
+          </div>
+          <div class="form-row-3">
+            <div class="form-group"><label>Mileage</label><input id="a-miles" type="number" placeholder="12500"></div>
+            <div class="form-group"><label>Price ($) *</label><input id="a-price" type="number" placeholder="32990"></div>
+            <div class="form-group"><label>Est. Monthly ($)</label><input id="a-monthly" type="number" placeholder="389"></div>
+          </div>
+          <div class="form-group"><label>Color</label><input id="a-color" type="text" placeholder="Midnight Black"></div>
+
+          <div class="form-group">
+            <label>Car Photo</label>
+            <div style="display:flex;gap:0.75rem;align-items:flex-start;flex-wrap:wrap">
+              <div style="flex:1;min-width:200px">
+                <input id="a-photo-url" type="text" placeholder="Paste image URL — or upload a file below" oninput="previewPhoto(this.value)" style="width:100%;background:var(--navy-light);color:var(--white);border:1px solid rgba(200,216,232,0.15);border-radius:5px;padding:0.65rem 0.9rem;font-size:0.88rem;font-family:'Inter',sans-serif;margin-bottom:0.5rem">
+                <div style="position:relative;display:inline-block">
+                  <input id="a-photo-file" type="file" accept="image/*" onchange="handlePhotoUpload(this)" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%">
+                  <button style="background:var(--navy-light);color:var(--silver);border:1px solid rgba(200,216,232,0.2);border-radius:5px;padding:0.5rem 1rem;font-size:0.78rem;font-weight:600;cursor:pointer">📁 Upload from Computer</button>
+                </div>
+              </div>
+              <div id="photo-preview-wrap" style="display:none;flex-shrink:0">
+                <img id="photo-preview" src="" alt="Preview" style="width:140px;height:95px;object-fit:cover;border-radius:8px;border:2px solid var(--amber)">
+                <div style="font-size:0.68rem;color:var(--green);text-align:center;margin-top:0.3rem">✅ Photo ready</div>
+              </div>
+            </div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:0.4rem">💡 Tip: Take a photo with your phone → email it to yourself → save to computer → upload here</div>
+          </div>
+          <div class="form-group">
+            <label>Vehicle Icon</label>
+            <div class="emoji-picker" id="emoji-picker">
+              <span class="emoji-opt active" onclick="selectEmoji(this,'🚗')">🚗 Car</span>
+              <span class="emoji-opt" onclick="selectEmoji(this,'🚙')">🚙 SUV</span>
+              <span class="emoji-opt" onclick="selectEmoji(this,'🛻')">🛻 Truck</span>
+              <span class="emoji-opt" onclick="selectEmoji(this,'🏎️')">🏎️ Sport</span>
+              <span class="emoji-opt" onclick="selectEmoji(this,'🚐')">🚐 Van</span>
+              <span class="emoji-opt" onclick="selectEmoji(this,'⚡')">⚡ EV</span>
+            </div>
+            <input id="a-emoji" type="hidden" value="🚗">
+          </div>
+          <div class="form-group"><label>Description</label><textarea id="a-desc" rows="3" placeholder="Write a clear, honest description of this vehicle..."></textarea></div>
+          <div class="form-group"><label>Key Features (one per line)</label><textarea id="a-highlights" rows="4" placeholder="Apple CarPlay & Android Auto&#10;Heated front seats&#10;Backup camera&#10;Push-button start"></textarea></div>
+          <div style="display:flex;gap:1rem;margin-top:0.5rem">
+            <button class="btn btn-amber" onclick="addCarToInventory()" style="flex:1;justify-content:center;padding:0.85rem">➕ Add to Inventory</button>
+            <button class="btn btn-outline" onclick="clearAddForm()">✕ Clear Form</button>
+          </div>
+          <div id="add-success" style="display:none;text-align:center;padding:1rem;color:#38C87A;font-weight:600;margin-top:0.75rem;background:rgba(56,200,122,0.08);border-radius:8px">
+            ✅ Vehicle added to inventory!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CRM ── -->
+    <div class="panel" id="panel-crm">
+      <div class="page-header">
+        <div><div class="page-title">CRM — Customer Leads</div><div class="page-sub">Everyone who expressed interest from your website. Click phone/email to contact instantly.</div></div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
+          <input class="search-input" type="text" placeholder="🔍 Search leads..." oninput="searchLeads(this.value)">
+          <button class="btn btn-green" onclick="exportCSV()">⬇️ Export CSV</button>
+          <button class="btn btn-danger" onclick="clearAllLeads()">🗑️ Clear All</button>
+        </div>
+      </div>
+      <div class="crm-stats-mini" id="crm-stats-mini"></div>
+      <div class="filter-tabs" id="crm-filter-tabs">
+        <button class="filter-tab active" onclick="filterLeads('all',this)">All</button>
+        <button class="filter-tab" onclick="filterLeads('hot',this)">🔥 Hot</button>
+        <button class="filter-tab" onclick="filterLeads('warm',this)">⚡ Warm</button>
+        <button class="filter-tab" onclick="filterLeads('cold',this)">❄️ Cold</button>
+        <button class="filter-tab" onclick="filterLeads('sold',this)">✅ Sold</button>
+      </div>
+      <div class="section-card">
+        <div style="overflow-x:auto">
+          <table class="crm-table">
+            <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Interested In</th><th>Price</th><th>Contact Time</th><th>Date</th><th>Status</th><th>Notes</th><th>Actions</th></tr></thead>
+            <tbody id="crm-tbody"></tbody>
+          </table>
+          <div class="crm-empty" id="crm-empty">No leads yet. When customers click "I'm Interested" on the website, they appear here automatically.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CALCULATOR ── -->
+    <div class="panel" id="panel-calculator">
+      <div class="page-header">
+        <div><div class="page-title">Auto Loan Calculator</div><div class="page-sub">Estimate monthly payments for any vehicle instantly.</div></div>
+      </div>
+      <div class="calc-layout">
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">Adjust Parameters</div></div>
+          <div class="section-card-body">
+            <div class="calc-field">
+              <div class="calc-field-header"><span class="calc-field-label">Vehicle Price</span><span class="calc-field-val" id="lbl-price">$32,000</span></div>
+              <input type="range" id="calc-price" min="5000" max="100000" step="500" value="32000" oninput="updateCalc()">
+            </div>
+            <div class="calc-field">
+              <div class="calc-field-header"><span class="calc-field-label">Down Payment</span><span class="calc-field-val" id="lbl-down">$3,000</span></div>
+              <input type="range" id="calc-down" min="0" max="20000" step="500" value="3000" oninput="updateCalc()">
+            </div>
+            <div class="calc-field">
+              <div class="calc-field-header"><span class="calc-field-label">Trade-In Value</span><span class="calc-field-val" id="lbl-trade">$0</span></div>
+              <input type="range" id="calc-trade" min="0" max="30000" step="500" value="0" oninput="updateCalc()">
+            </div>
+            <div class="calc-field">
+              <div class="calc-field-header"><span class="calc-field-label">Loan Term</span><span class="calc-field-val" id="lbl-term">60 months</span></div>
+              <input type="range" id="calc-term" min="24" max="84" step="12" value="60" oninput="updateCalc()">
+            </div>
+            <div class="calc-field">
+              <div class="calc-field-header"><span class="calc-field-label">Interest Rate (APR)</span><span class="calc-field-val" id="lbl-rate">6.9%</span></div>
+              <input type="range" id="calc-rate" min="1.9" max="24.9" step="0.1" value="6.9" oninput="updateCalc()">
+            </div>
+            <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(200,216,232,0.1)">
+              <div style="font-size:0.72rem;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Quick Fill from Inventory</div>
+              <div style="display:flex;flex-wrap:wrap;gap:0.5rem" id="calc-quick-btns"></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="calc-result-box">
+            <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;margin-bottom:0.4rem">Monthly Payment</div>
+            <div class="calc-big" id="calc-result">$548</div>
+            <div class="calc-sub">per month</div>
+            <div id="calc-breakdown"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── VIN DECODER ── -->
+    <div class="panel" id="panel-vin">
+      <div class="page-header">
+        <div><div class="page-title">VIN Decoder</div><div class="page-sub">Look up any vehicle by its 17-character VIN number. Powered by NHTSA's free database.</div></div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-header"><div class="section-card-title">Enter VIN</div></div>
+        <div class="section-card-body">
+          <div class="vin-box">
+            <div class="vin-row">
+              <input id="vin-input2" class="vin-input" type="text" maxlength="17" placeholder="e.g. 1HGBH41JXMN109186" oninput="this.value=this.value.toUpperCase()">
+              <button class="btn btn-amber" onclick="decodeVIN2()">🔍 Decode VIN</button>
+            </div>
+          </div>
+          <div id="vin-full-result" style="margin-top:1.5rem;display:none">
+            <div style="font-size:0.82rem;font-weight:700;color:#38C87A;margin-bottom:1rem">✅ Vehicle Information Found</div>
+            <div id="vin-full-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.75rem"></div>
+            <div style="margin-top:1.5rem;display:flex;gap:1rem">
+              <button class="btn btn-amber" onclick="goToAddWithVIN()">➕ Add This Vehicle to Inventory</button>
+            </div>
+          </div>
+          <div id="vin-full-status" class="vin-status" style="margin-top:0.75rem"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── AI AUTO-REPLY ── -->
+    <div class="panel" id="panel-ai-reply">
+      <div class="page-header">
+        <div><div class="page-title">🤖 AI Auto-Reply</div><div class="page-sub">Claude AI automatically responds to every lead the moment they submit interest in a car.</div></div>
+      </div>
+
+      <!-- HOW IT WORKS -->
+      <div class="section-card" style="margin-bottom:1.5rem">
+        <div class="section-card-header"><div class="section-card-title">How It Works</div></div>
+        <div class="section-card-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+            <div style="background:var(--navy-mid);border-radius:8px;padding:1rem;text-align:center">
+              <div style="font-size:2rem;margin-bottom:0.5rem">❤️</div>
+              <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.25rem">Customer Clicks Interested</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">They fill in name, phone, email</div>
+            </div>
+            <div style="background:var(--navy-mid);border-radius:8px;padding:1rem;text-align:center">
+              <div style="font-size:2rem;margin-bottom:0.5rem">🤖</div>
+              <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.25rem">Claude AI Writes Reply</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">Personalized for their exact car</div>
+            </div>
+            <div style="background:var(--navy-mid);border-radius:8px;padding:1rem;text-align:center">
+              <div style="font-size:2rem;margin-bottom:0.5rem">📧</div>
+              <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.25rem">Email Sent Instantly</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">To their inbox in seconds</div>
+            </div>
+            <div style="background:var(--navy-mid);border-radius:8px;padding:1rem;text-align:center">
+              <div style="font-size:2rem;margin-bottom:0.5rem">💬</div>
+              <div style="font-weight:700;font-size:0.88rem;margin-bottom:0.25rem">SMS Sent Too</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">Text message follows up instantly</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI REPLY SETTINGS -->
+      <div class="section-card" style="margin-bottom:1.5rem">
+        <div class="section-card-header">
+          <div><div class="section-card-title">🤖 Claude AI Email Reply</div><div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Requires EmailJS to be set up in Email & SMS Setup</div></div>
+          <span id="ai-email-badge" style="font-size:0.72rem;font-weight:700;padding:0.25rem 0.75rem;border-radius:20px;background:rgba(200,216,232,0.1);color:var(--text-muted)">Disabled</span>
+        </div>
+        <div class="section-card-body">
+          <div style="display:flex;align-items:center;justify-content:space-between;background:var(--navy-mid);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.25rem;cursor:pointer;border:1px solid rgba(200,216,232,0.1)" onclick="toggleAIEmail()">
+            <div>
+              <div style="font-weight:600;font-size:0.88rem">Enable AI Email Auto-Reply</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Claude writes & sends a personalized email to every lead instantly</div>
+            </div>
+            <div id="ai-email-toggle" style="width:44px;height:24px;background:var(--navy-light);border-radius:12px;position:relative;transition:background 0.3s;flex-shrink:0;border:1px solid rgba(200,216,232,0.2)"><div style="position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:2px;left:2px;transition:left 0.3s" id="ai-email-thumb"></div></div>
+          </div>
+          <div class="form-group"><label>Your Reply-From Email</label><input id="ai-reply-email" type="email" placeholder="sales@lutzcars.com" value="sales@lutzcars.com"></div>
+          <div class="form-group">
+            <label>AI Personality / Instructions</label>
+            <textarea id="ai-instructions" rows="4" placeholder="e.g. Be friendly and warm. Always mention we have Carfax on every car. Mention we finance all credit types. Keep replies short and end with a call to action.">Be friendly, warm and professional. Always mention Lutz Auto Sales has Carfax reports on every vehicle. Mention we finance all credit types - good, bad or no credit. Keep the reply under 80 words. Always end with a clear call to action to call (813) 727-6111 or visit us at 17604 N US Hwy 41, Lutz FL.</textarea>
+          </div>
+          <div style="background:var(--navy-mid);border-radius:8px;padding:1rem;margin-bottom:1.25rem">
+            <div style="font-size:0.78rem;font-weight:700;color:var(--amber);margin-bottom:0.5rem">📝 Example AI Reply:</div>
+            <div id="ai-example" style="font-size:0.82rem;color:var(--silver);line-height:1.7;font-style:italic">"Hi Maria! Thanks so much for your interest in the 2017 Toyota Prius v at Lutz Auto Sales. This 1-owner vehicle comes with a full Carfax report and is priced at $14,990. We finance all credit types! Give us a call at (813) 727-6111 or stop by 17604 N US Hwy 41, Lutz FL — we'd love to get you behind the wheel today! 🚗"</div>
+            <button class="btn btn-outline" onclick="generateExample()" style="margin-top:0.75rem;font-size:0.75rem;padding:0.35rem 0.9rem">🔄 Generate Fresh Example</button>
+          </div>
+          <button class="btn btn-amber" onclick="saveAISettings()">💾 Save AI Email Settings</button>
+          <div id="ai-save-msg" style="display:none;margin-top:0.75rem;font-size:0.83rem;padding:0.6rem 1rem;border-radius:6px"></div>
+        </div>
+      </div>
+
+      <!-- SMS AUTO-REPLY -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <div><div class="section-card-title">💬 Twilio SMS Auto-Reply</div><div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Requires Twilio to be set up in Email & SMS Setup</div></div>
+          <span id="ai-sms-badge" style="font-size:0.72rem;font-weight:700;padding:0.25rem 0.75rem;border-radius:20px;background:rgba(200,216,232,0.1);color:var(--text-muted)">Disabled</span>
+        </div>
+        <div class="section-card-body">
+          <div style="display:flex;align-items:center;justify-content:space-between;background:var(--navy-mid);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.25rem;cursor:pointer;border:1px solid rgba(200,216,232,0.1)" onclick="toggleAISMS()">
+            <div>
+              <div style="font-weight:600;font-size:0.88rem">Enable SMS Auto-Reply</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Sends an instant text message to every lead's phone number</div>
+            </div>
+            <div id="ai-sms-toggle" style="width:44px;height:24px;background:var(--navy-light);border-radius:12px;position:relative;transition:background 0.3s;flex-shrink:0;border:1px solid rgba(200,216,232,0.2)"><div style="position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:2px;left:2px;transition:left 0.3s" id="ai-sms-thumb"></div></div>
+          </div>
+
+          <div style="background:var(--navy-mid);border-radius:8px;padding:1rem;margin-bottom:1.25rem">
+            <div style="font-size:0.78rem;font-weight:700;color:#9B8AF5;margin-bottom:0.5rem">💬 Auto SMS Message Sent:</div>
+            <div style="font-size:0.82rem;color:var(--silver);line-height:1.7;font-style:italic">"Hi [Name]! 👋 This is Lutz Auto Sales. Thanks for your interest in the [Car] ($[Price]). We'd love to help you drive home today! Call us at (813) 727-6111 or stop by 17604 N US Hwy 41, Lutz FL. - Lutz Auto Sales"</div>
+          </div>
+
+          <div style="background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.2);border-radius:8px;padding:1rem;margin-bottom:1.25rem">
+            <div style="font-size:0.82rem;color:var(--amber);font-weight:700;margin-bottom:0.5rem">⚠️ Requirements:</div>
+            <div style="font-size:0.8rem;color:var(--silver);line-height:1.7">
+              1. Set up Twilio in <strong>Email & SMS Setup</strong> first<br>
+              2. Deploy the free proxy server (code provided there)<br>
+              3. Add proxy URL → Save → Enable SMS here
+            </div>
+          </div>
+
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <button class="btn btn-amber" onclick="saveAISettings()" style="background:#7C6AF5">💾 Save SMS Settings</button>
+            <button class="btn btn-outline" onclick="showPanel('settings',null)">⚙️ Set Up Twilio First →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEST PANEL -->
+      <div class="section-card" style="margin-top:1.5rem">
+        <div class="section-card-header"><div class="section-card-title">🧪 Test Auto-Reply</div></div>
+        <div class="section-card-body">
+          <p style="font-size:0.83rem;color:var(--text-muted);margin-bottom:1rem">Send a test auto-reply to yourself to see exactly what your customers receive.</p>
+          <div class="form-row">
+            <div class="form-group"><label>Test Name</label><input id="test-name" type="text" value="Test Customer" placeholder="Test Customer"></div>
+            <div class="form-group"><label>Your Email</label><input id="test-email" type="email" placeholder="your@email.com"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Your Phone</label><input id="test-phone" type="tel" placeholder="(813) 555-0100"></div>
+            <div class="form-group"><label>Test Car</label><input id="test-car" type="text" value="2017 Toyota Prius v Three - $14,990" placeholder="2017 Toyota Prius v"></div>
+          </div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <button class="btn btn-amber" onclick="sendTestReply()">📧 Send Test Email Reply</button>
+            <button class="btn btn-amber" onclick="sendTestSMS()" style="background:#7C6AF5">💬 Send Test SMS</button>
+          </div>
+          <div id="test-result" style="display:none;margin-top:0.75rem;font-size:0.83rem;padding:0.75rem 1rem;border-radius:6px"></div>
+        </div>
+      </div>
+
+    </div><!-- /panel-ai-reply -->
+
+    <!-- ── SETTINGS: EMAIL & SMS ── -->
+    <div class="panel" id="panel-settings">
+      <div class="page-header">
+        <div><div class="page-title">Email & SMS Setup</div><div class="page-sub">Connect EmailJS (free) and Twilio to send real emails and texts directly from the CRM.</div></div>
+      </div>
+
+      <!-- EMAILJS -->
+      <div class="section-card" style="margin-bottom:1.5rem">
+        <div class="section-card-header">
+          <div>
+            <div class="section-card-title">📧 EmailJS — Send Real Emails</div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Free up to 200 emails/month · No server needed · Works with Gmail, Outlook, any email</div>
+          </div>
+          <span id="emailjs-status-badge" style="font-size:0.72rem;font-weight:700;padding:0.25rem 0.75rem;border-radius:20px;background:rgba(200,216,232,0.1);color:var(--text-muted)">Not Connected</span>
+        </div>
+        <div class="section-card-body">
+          <div style="background:var(--navy-mid);border-radius:8px;padding:1.25rem;margin-bottom:1.5rem;border-left:3px solid var(--amber)">
+            <div style="font-size:0.82rem;font-weight:700;color:var(--amber);margin-bottom:0.75rem">📋 How to get your free EmailJS keys (3 minutes):</div>
+            <ol style="font-size:0.82rem;color:var(--silver);line-height:1.9;padding-left:1.25rem">
+              <li>Go to <a href="https://emailjs.com" target="_blank" style="color:var(--amber)">emailjs.com</a> → Create free account</li>
+              <li>Click <strong>Email Services</strong> → Add Service → Choose Gmail or Outlook → Connect it</li>
+              <li>Copy your <strong>Service ID</strong> (looks like: <code style="background:var(--navy-light);padding:0.1rem 0.4rem;border-radius:3px">service_xxxxxxx</code>)</li>
+              <li>Click <strong>Email Templates</strong> → Create Template → Use the template below → Save</li>
+              <li>Copy your <strong>Template ID</strong> (looks like: <code style="background:var(--navy-light);padding:0.1rem 0.4rem;border-radius:3px">template_xxxxxxx</code>)</li>
+              <li>Click your profile → <strong>Account</strong> → Copy your <strong>Public Key</strong></li>
+            </ol>
+          </div>
+          <div style="background:var(--navy-light);border-radius:8px;padding:1rem;margin-bottom:1.5rem;font-size:0.78rem;color:var(--text-muted)">
+            <div style="font-weight:700;color:var(--silver);margin-bottom:0.5rem">📄 Paste this in your EmailJS Template Body:</div>
+            <pre style="white-space:pre-wrap;line-height:1.7;color:var(--silver)">Subject: Following up on your interest in {{car_name}}
+
+Hi {{to_name}},
+
+Thank you for your interest in the {{car_name}} at Lutz Auto Sales!
+
+We wanted to follow up and see if you have any questions or would like to schedule a test drive.
+
+Message from our team:
+{{message}}
+
+Feel free to reach us anytime:
+📞 (813) 727-6111
+🌐 lutzcars.com
+
+Best regards,
+Lutz Auto Sales Team</pre>
+          </div>
+          <div class="form-row-3">
+            <div class="form-group"><label>Service ID *</label><input id="ejs-service" type="text" placeholder="service_xxxxxxx"></div>
+            <div class="form-group"><label>Template ID *</label><input id="ejs-template" type="text" placeholder="template_xxxxxxx"></div>
+            <div class="form-group"><label>Public Key *</label><input id="ejs-pubkey" type="text" placeholder="xxxxxxxxxxxxxxxxxxxxxx"></div>
+          </div>
+          <div class="form-group"><label>Your Dealership Email (From)</label><input id="ejs-from" type="email" placeholder="sales@lutzcars.com"></div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <button class="btn btn-amber" onclick="saveEmailJS()">💾 Save & Connect EmailJS</button>
+            <button class="btn btn-outline" onclick="testEmail()">📧 Send Test Email</button>
+          </div>
+          <div id="emailjs-msg" style="display:none;margin-top:0.75rem;font-size:0.83rem;padding:0.6rem 1rem;border-radius:6px"></div>
+        </div>
+      </div>
+
+      <!-- TWILIO SMS -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <div>
+            <div class="section-card-title">💬 Twilio — Send Real SMS Texts</div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">~$0.01 per text · Real US phone number · Instant delivery</div>
+          </div>
+          <span id="twilio-status-badge" style="font-size:0.72rem;font-weight:700;padding:0.25rem 0.75rem;border-radius:20px;background:rgba(200,216,232,0.1);color:var(--text-muted)">Not Connected</span>
+        </div>
+        <div class="section-card-body">
+          <div style="background:var(--navy-mid);border-radius:8px;padding:1.25rem;margin-bottom:1.5rem;border-left:3px solid #7C6AF5">
+            <div style="font-size:0.82rem;font-weight:700;color:#9B8AF5;margin-bottom:0.75rem">📋 How to get your Twilio credentials (5 minutes):</div>
+            <ol style="font-size:0.82rem;color:var(--silver);line-height:1.9;padding-left:1.25rem">
+              <li>Go to <a href="https://twilio.com" target="_blank" style="color:#9B8AF5">twilio.com</a> → Sign up free (includes $15 trial credit)</li>
+              <li>From your Console Dashboard, copy your <strong>Account SID</strong></li>
+              <li>Copy your <strong>Auth Token</strong> (click the eye icon to reveal)</li>
+              <li>Click <strong>Phone Numbers</strong> → Get a Number → Pick a US number (~$1/month)</li>
+              <li>Paste all three below and save</li>
+            </ol>
+            <div style="margin-top:0.75rem;padding:0.75rem;background:rgba(220,60,60,0.1);border-radius:6px;font-size:0.78rem;color:#F07070">
+              ⚠️ <strong>Important:</strong> Twilio requires a backend server to send SMS securely (Auth Token must stay private). Below connects to a proxy — see the setup note after saving.
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Account SID *</label><input id="twilio-sid" type="text" placeholder="ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"></div>
+            <div class="form-group"><label>Auth Token *</label><input id="twilio-token" type="password" placeholder="••••••••••••••••••••••••••••••••"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Your Twilio Phone Number *</label><input id="twilio-from" type="text" placeholder="+18137276111"></div>
+            <div class="form-group"><label>Proxy Server URL</label><input id="twilio-proxy" type="text" placeholder="https://your-proxy.com/send-sms"></div>
+          </div>
+          <div style="background:var(--navy-mid);border-radius:8px;padding:1rem;margin-bottom:1.25rem;font-size:0.8rem;color:var(--silver)">
+            <strong style="color:var(--amber)">💡 Free Proxy Option:</strong> Deploy a free SMS proxy in 2 minutes using <a href="https://render.com" target="_blank" style="color:var(--amber)">Render.com</a> or <a href="https://railway.app" target="_blank" style="color:var(--amber)">Railway.app</a>. After saving your Twilio keys, click "Get Proxy Code" below for a copy-paste Node.js server you can deploy for free.
+          </div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap">
+            <button class="btn btn-amber" onclick="saveTwilio()" style="background:#7C6AF5;color:#fff">💾 Save & Connect Twilio</button>
+            <button class="btn btn-outline" onclick="testSMS()">💬 Send Test SMS</button>
+            <button class="btn btn-outline" onclick="showProxyCode()">📄 Get Free Proxy Code</button>
+          </div>
+          <div id="twilio-msg" style="display:none;margin-top:0.75rem;font-size:0.83rem;padding:0.6rem 1rem;border-radius:6px"></div>
+        </div>
+      </div>
+
+      <!-- PROXY CODE MODAL -->
+      <div id="proxy-code-box" style="display:none;margin-top:1.5rem">
+        <div class="section-card">
+          <div class="section-card-header"><div class="section-card-title">📄 Free SMS Proxy Server (Node.js)</div><button class="btn btn-outline" onclick="copyProxyCode()" style="font-size:0.72rem;padding:0.35rem 0.75rem">📋 Copy Code</button></div>
+          <div class="section-card-body">
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1rem">Deploy this to <a href="https://render.com" target="_blank" style="color:var(--amber)">Render.com</a> free tier — create a new Web Service, paste this code, set environment variables, and copy the URL into the Proxy field above.</p>
+            <pre id="proxy-code" style="background:var(--navy-light);padding:1.25rem;border-radius:8px;font-size:0.75rem;color:var(--silver);overflow-x:auto;line-height:1.7;white-space:pre">const express = require('express');
+const twilio = require('twilio');
+const cors = require('cors');
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+const client = twilio(
+  process.env.TWILIO_SID,
+  process.env.TWILIO_TOKEN
+);
+
+app.post('/send-sms', async (req, res) => {
+  try {
+    const { to, message } = req.body;
+    await client.messages.create({
+      body: message,
+      from: process.env.TWILIO_FROM,
+      to: to
+    });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
+
+app.listen(3000, () => console.log('SMS proxy running'));
+
+// package.json dependencies:
+// "express": "^4.18.0"
+// "twilio": "^4.0.0"
+// "cors": "^2.8.5"
+
+// Environment variables to set on Render:
+// TWILIO_SID = your account SID
+// TWILIO_TOKEN = your auth token
+// TWILIO_FROM = your Twilio phone number</pre>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /panel-settings -->
+
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  /* ── INVENTORY DATA ── */
+  // Load from localStorage first, fallback to real inventory
+  const defaultInventory = [
+    {id:1,status:'used',make:'Nissan',model:'350Z',year:2007,price:8799,monthly:147,type:'Convertible',emoji:'🏎️',color:'Pikes Peak White Pearl',miles:140000,mpg:'17/24',hp:306,engine:'3.5L V6',transmission:'5-Speed Shiftable Auto',seats:2,slug:'2007-nissan-350z-grand-touring',desc:'A true sports car icon delivering 306hp of pure driving excitement.',highlights:['306hp V6 Engine','Grand Touring Package','Bose Audio','Leather Seats'],photo:'https://cdn05.carsforsale.com/008d02f31b2d4207e36469d1472ac4c0c9/2007-nissan-350z-grand-252520touring.jpg?width=480&height=360&format=&sig=c8d29bcca7eac7d9',carfax:'https://www.carfax.com/vehiclehistory/ar20/uaIpyY-AGEF2TFegOKZw0agme-P1k9vKRsyK7jy-LJtY62Phj12rG_VkOBPqrhT4ySOH0yFSkKg5105Q3zneOktG6cSvGK5GSYI',cfRating:'good'},
+    {id:2,status:'used',make:'Honda',model:'Ridgeline',year:2008,price:6990,monthly:117,type:'Truck',emoji:'🛻',color:'Formal Black',miles:145000,mpg:'15/21',hp:247,engine:'3.5L V6',transmission:'5-Speed Automatic',seats:5,slug:'2008-honda-ridgeline-rts',desc:'Combines truck utility with car-like comfort and Honda reliability.',highlights:['247hp V6','Four Wheel Drive','In-Bed Trunk','Dual-Action Tailgate'],photo:'https://cdn05.carsforsale.com/4f3f0a9e36ca2135892e617ec036da22/2008-honda-ridgeline-rts.jpg?width=480&height=360&format=&sig=829b3eb070b90cb4',carfax:'https://www.carfax.com/vehiclehistory/ar20/NEuHorfOI56Y25Ndcr6aEQkxDQgejhMFaFEraN7S6_NkWEOJp0Lbh692ZZl7plhk_X9Gdokhoeg6LTdxzmcNVjQMgXJBpmXG-TE',cfRating:'great'},
+    {id:3,status:'used',make:'Toyota',model:'Prius',year:2008,price:4990,monthly:83,type:'Hatchback',emoji:'🚗',color:'Magnetic Grey Metallic',miles:204600,mpg:'48/45',hp:76,engine:'1.5L Hybrid I4',transmission:'CVT',seats:5,slug:'2008-toyota-prius-standard',desc:'Exceptional fuel economy in a proven hybrid package.',highlights:['Hybrid Powertrain','48 City MPG','Toyota Reliability','Low Running Costs'],photo:'https://cdn05.carsforsale.com/00fd2c18deba7d8ddb3bc603de4bbc398a/2008-toyota-prius-standard.jpg?width=480&height=360&format=&sig=468224e48b633d07',carfax:'https://www.carfax.com/vehiclehistory/ar20/HTYEu02K46ddEwZOvoSEC7Oi0agsMF8P3yVaFWTzpsK2-S-xzJRjixQQqWaMvaZBrsAmJ1lCsUdZMaIxSDPx7hdNvbhY3k8wUOU',cfRating:'showme'},
+    {id:4,status:'used',make:'Nissan',model:'Frontier',year:2016,price:11990,monthly:200,type:'Truck',emoji:'🛻',color:'Forged Copper',miles:140898,mpg:'16/22',hp:261,engine:'4.0L V6',transmission:'5-Speed Automatic',seats:5,slug:'2016-nissan-frontier-sv',desc:'Capable mid-size truck ready for work or play.',highlights:['261hp V6','Bed Liner','Towing Capability','Backup Camera'],photo:'https://cdn05.carsforsale.com/00fd92c52c2f16819b0fa01baf8a78fefe/2016-nissan-frontier-sv.jpg?width=480&height=360&format=&sig=68f10beb2cee2971',carfax:'https://www.carfax.com/vehiclehistory/ar20/aOskRqCHmqFhbyJgy3Cq6gfCCRMlUaBUlSYSFhM-94HTBUWAEL1T7cOiqyG1PvCwwKsHXy_rLlqGF8zLj4r73AfrTHPqDgytNwE',cfRating:'great'},
+    {id:5,status:'used',make:'Toyota',model:'Prius v',year:2017,price:14990,monthly:250,type:'Wagon',emoji:'🚗',color:'Blue Ribbon Metallic',miles:104100,mpg:'44/40',hp:134,engine:'1.8L Hybrid I4',transmission:'CVT',seats:5,slug:'2017-toyota-prius-v-three',desc:'1-Owner! Wagon versatility with hybrid efficiency.',highlights:['1-Owner','Hybrid','Extra Cargo','Toyota Safety Sense'],photo:'https://cdn05.carsforsale.com/00c2bc87fe0cbd2bcd5fc04bfc3c80e71d/2017-toyota-prius-252520v-three.jpg?width=480&height=360&format=&sig=4b4526d87de78cde',carfax:'https://www.carfax.com/vehiclehistory/ar20/-VJh9h7jN8KXqbkfDaxdItd5Dq7wxIxkSiO3BAIWZt-m8ujnaJZ_DUGCwtsu0mv3RA11mupZ9_T2YE0BrgZDR7oScgzm-73Eml4',cfRating:'1own_good'},
+    {id:6,status:'used',make:'Hyundai',model:'Sonata',year:2017,price:8999,monthly:150,type:'Sedan',emoji:'🚗',color:'Scarlet Red',miles:85121,mpg:'25/38',hp:185,engine:'2.4L I4',transmission:'6-Speed Shiftable Auto',seats:5,slug:'2017-hyundai-sonata-sport',desc:'1-Owner Sonata Sport in striking Scarlet Red.',highlights:['1-Owner','Sport Package','Backup Camera','Heated Seats'],photo:'https://cdn05.carsforsale.com/00d57ae383fbc3e13bb06f66c07cef70cc/2017-hyundai-sonata-sport.jpg?width=480&height=360&format=&sig=92190214ccf07000',carfax:'https://www.carfax.com/vehiclehistory/ar20/GEjYuFyMD2TCph9Tf1UoonImMczOPclbexAS9GHF8ZFsAzNRNouBh5c7PoRbpMDisi0nDsbN9AtIbOd8kN1l8L8mw6NGCRj22jo',cfRating:'1own'},
+    {id:7,status:'used',make:'Toyota',model:'Prius',year:2007,price:7990,monthly:133,type:'Hatchback',emoji:'🚗',color:'Seaside Pearl',miles:81617,mpg:'48/45',hp:76,engine:'1.5L Hybrid I4',transmission:'CVT',seats:5,slug:'2007-toyota-prius-base',desc:'1-Owner with great Carfax! Low mileage for its age.',highlights:['1-Owner Great Carfax','Low Miles','Hybrid','Toyota Reliability'],photo:'https://cdn05.carsforsale.com/03ab9ab5a0b4296827f76a594b221491/2007-toyota-prius-base.jpg?width=480&height=360&format=&sig=8fb936390b2bff44',carfax:'https://www.carfax.com/vehiclehistory/ar20/TPUtaGn4SbSH2f6WFDtjxv4sM7Ew8oEQ-J2TJ9f5kHOCs9nviQO9abuO9UXq22TtIucw8uX1z9HCRWjB37BIKciYfAA9Rp9ZzXc',cfRating:'1own_great'},
+    {id:8,status:'used',make:'Cadillac',model:'SRX',year:2015,price:9499,monthly:158,type:'SUV',emoji:'🚙',color:'Terra Mocha Metallic',miles:118075,mpg:'17/24',hp:308,engine:'3.6L V6',transmission:'6-Speed Automatic',seats:5,slug:'2015-cadillac-srx-luxury',desc:'Luxury at an affordable price with powerful V6.',highlights:['308hp V6','Leather','Navigation','Bose Audio'],photo:'https://cdn05.carsforsale.com/4550043f0537f3664bba851113197eeb/2015-cadillac-srx-luxury-252520collection.jpg?width=480&height=360&format=&sig=87597689b66538fa',carfax:'https://www.carfax.com/vehiclehistory/ar20/aHyvYPpR0XPtozo1DvqWsjLvGqZVihhQzJz8stLpWEOeJlRy_4d-oHtZkwklB5HgHzbYxpQao51tWzKjQjmdpeFiN6MJ_96MCEE',cfRating:'fair'},
+    {id:9,status:'used',make:'Ford',model:'Mustang',year:2016,price:12990,monthly:217,type:'Coupe',emoji:'🏎️',color:'Race Red',miles:102990,mpg:'21/32',hp:310,engine:'EcoBoost 2.3L Turbo',transmission:'6-Speed Shiftable Auto',seats:4,slug:'2016-ford-mustang-ecoboost-premium',desc:'1-Owner! Iconic Mustang with 310hp turbocharged engine.',highlights:['1-Owner Great Carfax','310hp Turbo','Premium Package','Leather'],photo:'https://cdn05.carsforsale.com/00f3c7502f6443763cc488c2fe58037ed5/2016-ford-mustang-ecoboost-252520premium.jpg?width=480&height=360&format=&sig=54b176fc181d9119',carfax:'https://www.carfax.com/vehiclehistory/ar20/7n-VZxGJMXnaXi0_aY5ImuUGgdIUtUndQDfZ7wFVLbrXwzPZqbSDgIJtw4eaP5AO3aBoMDTGlimWQvsavqRb0_kBG0Mgnp7qvqg',cfRating:'1own_great'},
+    {id:10,status:'used',make:'Toyota',model:'Prius v',year:2012,price:8990,monthly:150,type:'Wagon',emoji:'🚗',color:'Clear Sky Metallic',miles:169527,mpg:'44/40',hp:134,engine:'1.8L Hybrid I4',transmission:'CVT',seats:5,slug:'2012-toyota-prius-v-five',desc:'Top trim wagon with navigation and JBL audio.',highlights:['Top Trim','Navigation','JBL Audio','Extra Cargo'],photo:'https://cdn05.carsforsale.com/301d31956b49000495c1594019dc27c9/2012-toyota-prius-252520v-five.jpg?width=480&height=360&format=&sig=4b5a032c4dbd7504',carfax:'https://www.carfax.com/vehiclehistory/ar20/2qm2k1oAvYQAlWHCpE2GIYyVK9x5x91se71scJTLPYyFYLfH4djXabIKxeB9JmMtAErAP1iK12xygQjBJY796Yi3tWPnzZzHlr0',cfRating:'showme'},
+    {id:11,status:'used',make:'Toyota',model:'Tacoma',year:2017,price:19990,monthly:333,type:'Truck',emoji:'🛻',color:'Magnetic Gray Metallic',miles:176628,mpg:'18/23',hp:278,engine:'3.5L V6',transmission:'6-Speed Shiftable Auto',seats:5,slug:'2017-toyota-tacoma-sr5-v6',desc:'Legendary Tacoma SR5 V6 with 4WD.',highlights:['278hp V6','Four Wheel Drive','SR5 Package','Tow Package'],photo:'https://cdn05.carsforsale.com/4e623a917ecf762c68f3b46abee5d89e/2017-toyota-tacoma-sr5-252520v6.jpg?width=480&height=360&format=&sig=b71d428acc4d25b3',carfax:'https://www.carfax.com/vehiclehistory/ar20/kF_drrhaKHsT04E_0hHN3rjOZx6A50QvULS69C9erJQtFF4a74KSDFnJvbdHXUp-jJ2lOtbGRDs45r0HwPq9Rcl5L41fISi1elI',cfRating:'great'},
+    {id:12,status:'used',make:'Acura',model:'ILX',year:2014,price:11990,monthly:200,type:'Sedan',emoji:'🚗',color:'Bellanova White Pearl',miles:111361,mpg:'24/35',hp:150,engine:'2.0L I4',transmission:'5-Speed Shiftable Auto',seats:5,slug:'2014-acura-ilx-tech',desc:'Technology Package with ELS audio and navigation.',highlights:['Tech Package','Navigation','ELS Audio','Leather Seats'],photo:'https://cdn05.carsforsale.com/72d994eef5add643abd079e1d55622a6/2014-acura-ilx-2-0l-252520w-25252ftech.jpg?width=480&height=360&format=&sig=b20701c39b533ec2',carfax:'https://www.carfax.com/vehiclehistory/ar20/65fgcv6wIBRyVdtNBda-oceguMOIbO_n7zcYXNc7H1x5iPYlOapJ_AoHh5cjxy2oWLr5dI7tmBthg95wrjl07LXhwUujrtPVZIQ',cfRating:'good'},
+    {id:13,status:'used',make:'Mercedes-Benz',model:'E-Class',year:2013,price:8399,monthly:140,type:'Sedan',emoji:'🚗',color:'Indium Grey Metallic',miles:108235,mpg:'20/28',hp:302,engine:'3.5L V6',transmission:'7-Speed Shiftable Auto',seats:5,slug:'2013-mercedes-benz-e350-sport',desc:'European luxury at incredible value with 302hp.',highlights:['302hp V6','Sport Package','Harman Kardon','Panoramic Sunroof'],photo:'https://cdn05.carsforsale.com/00fca7e1d312f4f633b5cee399daf507b3/2013-mercedes-benz-e-class-e-252520350-252520sport.jpg?width=480&height=360&format=&sig=ee78f1ff6bc522a3',carfax:'https://www.carfax.com/vehiclehistory/ar20/5AkeobgEVek8Im9fA8YfkTGGesksFo-LMXYwTis-IIZkc3qO8oprKLhWNBjGM_c2qJgSDxtmIzWRj4bBAGGtCXm_sdT-aCJMX5A',cfRating:'good'},
+    {id:14,status:'used',make:'Ford',model:'Explorer',year:2018,price:11990,monthly:200,type:'SUV',emoji:'🚙',color:'Oxford White',miles:123929,mpg:'17/24',hp:280,engine:'EcoBoost 2.3L Turbo',transmission:'6-Speed Shiftable Auto',seats:7,slug:'2018-ford-explorer-xlt',desc:'1-Owner! 7-passenger Explorer with turbocharged performance.',highlights:['1-Owner Great Carfax','7-Passenger','280hp Turbo','Apple CarPlay'],photo:'https://cdn05.carsforsale.com/5056100e4a6538fe7721d739ee1f4176/2018-ford-explorer-xlt.jpg?width=480&height=360&format=&sig=3a135a1814e5802c',carfax:'https://www.carfax.com/vehiclehistory/ar20/dDa-gBEzbt8Z4zhm4CoTGvXldSU-dQM_zYFqrAUEy62HnRMtBTWxJ9HEWTfjKZvsQ7EUM4gqCs8AJE3R5gOD_oEE2ZFVVWb20ao',cfRating:'1own_great'},
+    {id:15,status:'used',make:'Toyota',model:'Prius v',year:2014,price:12990,monthly:217,type:'Wagon',emoji:'🚗',color:'Barcelona Red Metallic',miles:125327,mpg:'44/40',hp:134,engine:'1.8L Hybrid I4',transmission:'CVT',seats:5,slug:'2014-toyota-prius-v-three',desc:'Barcelona Red hybrid wagon with extra cargo and great MPG.',highlights:['Hybrid Wagon','Extra Cargo','Navigation Ready','Fuel Efficient'],photo:'https://cdn05.carsforsale.com/0551b7bfdb81f71746b25f92172eb9c0/2014-toyota-prius-252520v-three.jpg?width=480&height=360&format=&sig=1a2a1571ec7aac3c',carfax:'https://www.carfax.com/vehiclehistory/ar20/vCgRcTBoG4ruBMrTSbdiL1E6XfzSCLPJbOYzHQCLTA8x_lWu9Xar42hz9fZSQc7z45aXYp4-xgwd8325IXPjzyWpZ7wWCM2_75M',cfRating:'showme'},
+    {id:16,status:'used',make:'Honda',model:'Civic',year:2018,price:11599,monthly:193,type:'Sedan',emoji:'🚗',color:'White Orchid Pearl',miles:142067,mpg:'32/42',hp:158,engine:'2.0L I4',transmission:'CVT',seats:5,slug:'2018-honda-civic-ex',desc:'White Orchid Pearl Civic EX with Honda Sensing suite.',highlights:['Honda Sensing','Apple CarPlay','Backup Camera','Sunroof'],photo:'https://cdn05.carsforsale.com/00a1353c4e3dbdcdcfccd5599e4e9abb9e/2018-honda-civic-ex.jpg?width=480&height=360&format=&sig=0832e0d807aea6c8',carfax:'https://www.carfax.com/vehiclehistory/ar20/NMJvAMyyqz1hieYQWJXnU0VNMCgI0PHoOBfWd5mzOV00TzvIrfI_vJ8egD3Ad0pYzlIvGCaQJGFl9ONMdXGaK11AV8YNzg_Zwak',cfRating:'great'},
+    {id:17,status:'used',make:'Honda',model:'Civic',year:2017,price:12900,monthly:215,type:'Sedan',emoji:'🚗',color:'Gray',miles:125600,mpg:'32/42',hp:158,engine:'2.0L I4',transmission:'CVT',seats:5,slug:'2017-honda-civic-ex',desc:'1-Owner Civic EX with Honda Sensing and Apple CarPlay.',highlights:['1-Owner Good Carfax','Honda Sensing','Apple CarPlay','Sunroof'],photo:'https://cdn05.carsforsale.com/00a95058b357ae4faf4efc7cda1d3b52d5/2017-honda-civic-ex.jpg?width=480&height=360&format=&sig=e9dd9f780d1e1ca2',carfax:'https://www.carfax.com/vehiclehistory/ar20/OQmR_Ik4daoH4IFv41kZHe7WCe_Bly3Gj3jwHizXcgnPZBMBT_tN8I0jieN7Fw1sIq06AnUkTRSQMVAraHKg--EZHLyoBTsEm3s',cfRating:'1own_good'},
+    {id:18,status:'used',make:'Subaru',model:'Forester',year:2014,price:8990,monthly:150,type:'SUV',emoji:'🚙',color:'Jasmine Green Metallic',miles:119601,mpg:'22/29',hp:170,engine:'2.5L H4',transmission:'CVT',seats:5,slug:'2014-subaru-forester-touring',desc:'1-Owner! All-Wheel Drive Forester Touring.',highlights:['1-Owner Great Carfax','AWD','Panoramic Sunroof','Navigation'],photo:'https://cdn05.carsforsale.com/00c7d9f69a2414a751b14d20e238e87e27/2014-subaru-forester-2-5i-252520touring.jpg?width=480&height=360&format=&sig=62a7ed581c0d1256',carfax:'https://www.carfax.com/vehiclehistory/ar20/kTcyfQeTuLU2FujGnSbZXMd-HLPGJVdPw6yx7iZY_QrlQus5XMLAjBMYEOd3nuNH840cNt3ERa2YYdW0KMEu06gNqhoccH56PTs',cfRating:'1own_great'},
+    {id:19,status:'used',make:'Toyota',model:'Corolla',year:2014,price:8599,monthly:143,type:'Sedan',emoji:'🚗',color:'Classic Silver Metallic',miles:143545,mpg:'28/37',hp:132,engine:'1.8L I4',transmission:'CVT',seats:5,slug:'2014-toyota-corolla-le',desc:'One of the most dependable cars ever built.',highlights:['Great Carfax','Toyota Reliability','Fuel Efficient','Backup Camera'],photo:'https://cdn05.carsforsale.com/00bb337abd03f70dda810f53657e94f902/2014-toyota-corolla-le.jpg?width=480&height=360&format=&sig=9af1fd6187853aa3',carfax:'https://www.carfax.com/vehiclehistory/ar20/uuaHjF4F4SxLKdstjab54i3Mwop_kf6bTrBgVGIOasMdJdzEvQqoBfwfxM5svQuEE6fntoWI9VrR_Qc0SxlPDfXv4e67ZLCsF5U',cfRating:'great'},
+    {id:20,status:'used',make:'Acura',model:'TLX',year:2015,price:10990,monthly:183,type:'Sedan',emoji:'🚗',color:'Graphite Luster Metallic',miles:129136,mpg:'25/35',hp:206,engine:'2.4L I4',transmission:'8-Speed Double Clutch',seats:5,slug:'2015-acura-tlx-base',desc:'Sporty TLX with 8-speed dual-clutch transmission.',highlights:['Great Carfax','8-Speed DCT','AcuraWatch','Leather Seats'],photo:'https://cdn05.carsforsale.com/44d04a7d9f309135ea779cb6796aadbf/2015-acura-tlx-base.jpg?width=480&height=360&format=&sig=24e53200397f0981',carfax:'https://www.carfax.com/vehiclehistory/ar20/tEJUEJ1scl_Ndawzb0V2JGYBblFj0fOpR9P-GdwtEwT2H_tok1hq9SiAAi6zttrPQVlmEZR91taxa_C8Jj8D_l-5p_p5wq3Z-A8',cfRating:'great'},
+    {id:21,status:'used',make:'Toyota',model:'Prius',year:2011,price:8499,monthly:142,type:'Hatchback',emoji:'🚗',color:'White',miles:163234,mpg:'51/48',hp:134,engine:'1.8L Hybrid I4',transmission:'CVT',seats:5,slug:'2011-toyota-prius-three',desc:'51 City MPG! Navigation, JBL audio and outstanding efficiency.',highlights:['51 City MPG','Navigation','JBL Audio','Solar Moonroof'],photo:'https://cdn05.carsforsale.com/00df416ac67d2ff180fba89b96fadec226/2011-toyota-prius-three.jpg?width=480&height=360&format=&sig=b1bae53162d0b210',carfax:'https://www.carfax.com/vehiclehistory/ar20/ckUxU9mD9Vm6ylpPbKbtSxZHpmurO0WpgCPr8l1ReudYhC0ss-O3SY6TVKcryrpyciCs2HyrzyvHy3PgiTQDq4yfdcepj-PhVGw',cfRating:'showme'},
+    {id:22,status:'used',make:'Toyota',model:'Prius v',year:2013,price:8900,monthly:148,type:'Wagon',emoji:'🚗',color:'Barcelona Red Metallic',miles:152167,mpg:'44/40',hp:134,engine:'1.8L Hybrid I4',transmission:'CVT',seats:5,slug:'2013-toyota-prius-v-three',desc:'Barcelona Red hybrid wagon with extra cargo space.',highlights:['Good Carfax','Hybrid Wagon','Extra Cargo','Bluetooth'],photo:'https://cdn05.carsforsale.com/008dae4885d7218afd61b12aacd5061b1e/2013-toyota-prius-252520v-three.jpg?width=480&height=360&format=&sig=09d46ed03504e8f5',carfax:'https://www.carfax.com/vehiclehistory/ar20/P6Q0X29H6Tnm-wemfCs81OCZHzEHRIw1rx4hEQbhnTQiUs1TlOhTMKlnrPGj9qtQVoOmqeGboziBaWUYSbQwR-eb1FdmmyJ5YbM',cfRating:'good'},
+  ];
+
+  // Use localStorage if cars were added/modified, otherwise use real inventory
+  let inventory = JSON.parse(localStorage.getItem('lutz_inventory') || 'null');
+  if (!inventory || inventory.length < 22) {
+    inventory = defaultInventory;
+    localStorage.setItem('lutz_inventory', JSON.stringify(inventory));
+  }
+
+  let leads = JSON.parse(localStorage.getItem('lutz_leads') || '[]');
+  let crmFilter = 'all';
+  let vinDataGlobal = {};
+
+  function saveAll() {
+    localStorage.setItem('lutz_inventory', JSON.stringify(inventory));
+    localStorage.setItem('lutz_leads', JSON.stringify(leads));
+    updateCounts();
+  }
+
+  function updateCounts() {
+    document.getElementById('inv-count').textContent = inventory.length;
+    document.getElementById('lead-count').textContent = leads.length;
+    document.getElementById('dash-inv').textContent = inventory.length;
+    document.getElementById('dash-leads').textContent = leads.length;
+    document.getElementById('dash-sold').textContent = leads.filter(l=>l.status==='sold').length;
+    const hot = leads.filter(l=>l.status==='hot').length;
+    document.getElementById('dash-hot-lbl').textContent = hot + ' hot leads';
+    document.getElementById('dash-hot-lbl').style.color = hot > 0 ? '#F07070' : 'var(--text-muted)';
+  }
+
+  /* ── PANELS ── */
+  function showPanel(id, el) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+    if (el) el.classList.add('active');
+    if (id === 'crm') renderCRM(crmFilter);
+    if (id === 'inventory') renderInventoryTable();
+    if (id === 'dashboard') renderDashboard();
+    if (id === 'calculator') { updateCalc(); buildCalcQuickBtns(); }
+    if (id === 'settings') loadSettings();
+    if (id === 'ai-reply') loadAISettings();
+  }
+
+  /* ── DASHBOARD ── */
+  function renderDashboard() {
+    updateCounts();
+    // Hot leads widget
+    const hot = leads.filter(l=>l.status==='hot').slice(0,4);
+    const hotEl = document.getElementById('dash-hot-leads');
+    hotEl.innerHTML = hot.length === 0
+      ? '<div class="crm-empty" style="padding:1.5rem">No hot leads yet.</div>'
+      : hot.map(l=>`<div style="padding:0.75rem;border-bottom:1px solid rgba(200,216,232,0.07);display:flex;justify-content:space-between;align-items:center">
+          <div><strong style="font-size:0.88rem">${l.name}</strong><div style="font-size:0.75rem;color:var(--text-muted)">${l.car}</div></div>
+          <div style="display:flex;gap:0.5rem">
+            <a href="tel:${l.phone}" style="font-size:0.72rem;color:var(--amber);font-weight:700;text-decoration:none">📞 Call</a>
+            <a href="mailto:${l.email}" style="font-size:0.72rem;color:var(--silver);font-weight:700;text-decoration:none">✉️ Email</a>
+          </div>
+        </div>`).join('');
+
+    // Recent inventory
+    const recent = inventory.slice(0,4);
+    document.getElementById('dash-recent-inv').innerHTML = recent.map(c=>`
+      <div style="padding:0.7rem;border-bottom:1px solid rgba(200,216,232,0.07);display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;gap:0.75rem;align-items:center">
+          <span style="font-size:1.5rem">${c.emoji}</span>
+          <div><strong style="font-size:0.88rem">${c.year} ${c.make} ${c.model}</strong><div style="font-size:0.72rem;color:var(--text-muted)">${c.miles.toLocaleString()} mi</div></div>
+        </div>
+        <strong style="color:var(--amber);font-family:'Barlow Condensed',sans-serif;font-size:1.1rem">$${c.price.toLocaleString()}</strong>
+      </div>`).join('');
+  }
+
+  /* ── INVENTORY TABLE ── */
+  function renderInventoryTable(data) {
+    const rows = data || inventory;
+    const tbody = document.getElementById('inv-tbody');
+    tbody.innerHTML = rows.map(c=>`
+      <tr>
+        <td>
+          ${c.photo ? `<img src="${c.photo}" style="width:60px;height:40px;object-fit:cover;border-radius:5px;margin-right:0.5rem;vertical-align:middle">` : `<span style="font-size:1.3rem;margin-right:0.5rem">${c.emoji}</span>`}
+          <strong>${c.make} ${c.model}</strong>
+        </td>
+        <td>${c.year}</td>
+        <td style="color:var(--amber);font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700">$${c.price.toLocaleString()}</td>
+        <td>${c.miles.toLocaleString()} mi</td>
+        <td><span class="status-badge ${c.status}">${c.status === 'certified' ? 'CPO' : c.status}</span></td>
+        <td style="font-size:0.78rem;color:var(--text-muted)">${c.engine}</td>
+        <td>
+          <button class="crm-action-btn" onclick="removeVehicle(${c.id})" style="color:#F07070">🗑️ Remove</button>
+        </td>
+      </tr>`).join('');
+  }
+
+  function searchInventory(q) {
+    const filtered = inventory.filter(c => `${c.make} ${c.model} ${c.year} ${c.type}`.toLowerCase().includes(q.toLowerCase()));
+    renderInventoryTable(filtered);
+  }
+
+  function removeVehicle(id) {
+    if (!confirm('Remove this vehicle from inventory?')) return;
+    inventory = inventory.filter(c => c.id !== id);
+    saveAll(); renderInventoryTable();
+    showToast('Vehicle removed from inventory.');
+  }
+
+  /* ── VIN DECODER ── */
+  async function decodeVINCommon(vin, statusEl, resultEl, tagsEl, successCb) {
+    if (vin.length !== 17) {
+      statusEl.style.display = 'block'; statusEl.className = 'vin-status error';
+      statusEl.textContent = '⚠️ VIN must be exactly 17 characters.';
+      if(resultEl) resultEl.style.display = 'none'; return;
+    }
+    statusEl.style.display = 'block'; statusEl.className = 'vin-status loading';
+    statusEl.textContent = '🔄 Decoding VIN via NHTSA...';
+    if(resultEl) resultEl.style.display = 'none';
+    try {
+      const res = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`);
+      const data = await res.json();
+      const get = v => { const f = data.Results.find(r=>r.Variable===v); return f&&f.Value&&f.Value!=='Not Applicable'&&f.Value!=='null'?f.Value:null; };
+      const vd = {
+        make: get('Make'), model: get('Model'), year: get('Model Year'),
+        engine: [get('Displacement (L)')?get('Displacement (L)')+'L':null, get('Engine Number of Cylinders')?get('Engine Number of Cylinders')+'-Cyl':null, get('Fuel Type - Primary')].filter(Boolean).join(' '),
+        hp: get('Engine Brake (hp) From'), trans: get('Transmission Style'),
+        bodyType: get('Body Class'), driveType: get('Drive Type'),
+        trim: get('Trim'), doors: get('Number of Doors'), plantCountry: get('Plant Country'),
+        seats: get('Number of Seat Rows'),
+      };
+      if (!vd.make && !vd.model) {
+        statusEl.className = 'vin-status error'; statusEl.textContent = '❌ VIN not found. Please verify and try again.'; return;
+      }
+      vinDataGlobal = vd;
+      statusEl.style.display = 'none';
+      const tags = [['Make',vd.make],['Model',vd.model],['Year',vd.year],['Engine',vd.engine],['HP',vd.hp?vd.hp+' HP':null],['Transmission',vd.trans],['Body',vd.bodyType],['Drive',vd.driveType],['Trim',vd.trim],['Doors',vd.doors],['Made In',vd.plantCountry]];
+      tagsEl.innerHTML = tags.filter(t=>t[1]).map(([l,v])=>`<div class="vin-tag"><div class="vin-tag-label">${l}</div><div class="vin-tag-value">${v}</div></div>`).join('');
+      if(resultEl) resultEl.style.display = 'block';
+      if(successCb) successCb(vd);
+    } catch(e) {
+      statusEl.className = 'vin-status error'; statusEl.textContent = '❌ Could not connect. Check your internet connection.';
+    }
+  }
+
+  function decodeVIN() {
+    decodeVINCommon(
+      document.getElementById('vin-input').value.trim(),
+      document.getElementById('vin-status'),
+      document.getElementById('vin-result'),
+      document.getElementById('vin-tags')
+    );
+  }
+
+  function decodeVIN2() {
+    decodeVINCommon(
+      document.getElementById('vin-input2').value.trim(),
+      document.getElementById('vin-full-status'),
+      document.getElementById('vin-full-result'),
+      document.getElementById('vin-full-grid')
+    );
+  }
+
+  function fillFormFromVIN() {
+    const vd = vinDataGlobal;
+    if (vd.make)  document.getElementById('a-make').value  = vd.make;
+    if (vd.model) document.getElementById('a-model').value = vd.model;
+    if (vd.year)  document.getElementById('a-year').value  = vd.year;
+    if (vd.engine) document.getElementById('a-engine').value = vd.engine;
+    if (vd.hp)    document.getElementById('a-hp').value    = vd.hp;
+    if (vd.trans) document.getElementById('a-trans').value = vd.trans;
+    const emojiMap = {'SUV':'🚙','Truck':'🛻','Sedan':'🚗','Coupe':'🏎️','Minivan':'🚐'};
+    const bt = (vd.bodyType||'').toLowerCase();
+    for(const[k,v] of Object.entries({suv:'SUV','sport utility':'SUV',pickup:'Truck',sedan:'Sedan',coupe:'Coupe',van:'Minivan'})){
+      if(bt.includes(k)){document.getElementById('a-type').value=v;const em=emojiMap[v]||'🚗';document.getElementById('a-emoji').value=em;document.querySelectorAll('.emoji-opt').forEach(e=>e.classList.toggle('active',e.textContent.includes(em)));break;}
+    }
+    showPanel('add-vehicle', null);
+    showToast('Form filled from VIN! Complete the remaining details.');
+  }
+
+  function goToAddWithVIN() { fillFormFromVIN(); }
+
+  /* ── ADD VEHICLE ── */
+  function selectEmoji(el, emoji) {
+    document.querySelectorAll('.emoji-opt').forEach(e => e.classList.remove('active'));
+    el.classList.add('active'); document.getElementById('a-emoji').value = emoji;
+  }
+
+  function addCarToInventory() {
+    const make = document.getElementById('a-make').value.trim();
+    const model = document.getElementById('a-model').value.trim();
+    const year = document.getElementById('a-year').value.trim();
+    const price = document.getElementById('a-price').value.trim();
+    if (!make||!model||!year||!price) { alert('Please fill in Make, Model, Year, and Price.'); return; }
+    const highlights = (document.getElementById('a-highlights').value.trim()||'').split('\n').map(h=>h.trim()).filter(Boolean);
+    const car = {
+      id: Date.now(), status: document.getElementById('a-status').value,
+      make, model, year: parseInt(year), price: parseInt(price),
+      monthly: parseInt(document.getElementById('a-monthly').value)||Math.round(parseInt(price)/72),
+      type: document.getElementById('a-type').value,
+      emoji: document.getElementById('a-emoji').value,
+      photo: document.getElementById('a-photo-url').value.trim() || null,
+      color: document.getElementById('a-color').value.trim()||'See dealer',
+      miles: parseInt(document.getElementById('a-miles').value)||0,
+      mpg: document.getElementById('a-mpg').value.trim()||'N/A',
+      hp: parseInt(document.getElementById('a-hp').value)||0,
+      engine: document.getElementById('a-engine').value.trim()||'See specs',
+      transmission: document.getElementById('a-trans').value.trim()||'Automatic',
+      seats: parseInt(document.getElementById('a-seats').value)||5,
+      desc: document.getElementById('a-desc').value.trim()||`${year} ${make} ${model}`,
+      highlights: highlights.length ? highlights : ['Contact us for full feature list'],
+    };
+    inventory.unshift(car); saveAll();
+    document.getElementById('add-success').style.display = 'block';
+    showToast('✅ ' + year + ' ' + make + ' ' + model + ' added!');
+    clearAddForm(); setTimeout(()=>document.getElementById('add-success').style.display='none', 3000);
+  }
+
+  function clearAddForm() {
+    ['a-make','a-model','a-year','a-engine','a-hp','a-trans','a-seats','a-mpg','a-miles','a-price','a-monthly','a-color','a-desc','a-highlights','a-photo-url'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('photo-preview-wrap').style.display = 'none';
+    document.getElementById('photo-preview').src = '';
+    document.getElementById('vin-input').value=''; document.getElementById('vin-result').style.display='none'; document.getElementById('vin-status').style.display='none'; vinDataGlobal={};
+  }
+
+  /* ── CRM ── */
+  function renderCRM(filter) {
+    crmFilter = filter;
+    const filtered = filter==='all' ? leads : leads.filter(l=>l.status===filter);
+    const hot=leads.filter(l=>l.status==='hot').length, warm=leads.filter(l=>l.status==='warm').length, cold=leads.filter(l=>l.status==='cold').length, sold=leads.filter(l=>l.status==='sold').length;
+    document.getElementById('crm-stats-mini').innerHTML = `
+      <div class="crm-mini-box"><div class="crm-mini-num" style="color:#F0F0F0">${leads.length}</div><div class="crm-mini-lbl">Total Leads</div></div>
+      <div class="crm-mini-box"><div class="crm-mini-num" style="color:#F07070">${hot}</div><div class="crm-mini-lbl">🔥 Hot</div></div>
+      <div class="crm-mini-box"><div class="crm-mini-num" style="color:var(--amber)">${warm}</div><div class="crm-mini-lbl">⚡ Warm</div></div>
+      <div class="crm-mini-box"><div class="crm-mini-num" style="color:#38C87A">${sold}</div><div class="crm-mini-lbl">✅ Sold</div></div>
+    `;
+    const tbody = document.getElementById('crm-tbody');
+    const empty = document.getElementById('crm-empty');
+    if (filtered.length===0) { tbody.innerHTML=''; empty.style.display='block'; return; }
+    empty.style.display='none';
+    tbody.innerHTML = filtered.map(l=>`
+      <tr>
+        <td><strong>${l.name}</strong></td>
+        <td><a href="tel:${l.phone}" style="color:var(--amber);text-decoration:none;font-weight:600">${l.phone}</a></td>
+        <td><a href="mailto:${l.email}" style="color:var(--silver);text-decoration:none;font-size:0.78rem">${l.email}</a></td>
+        <td style="font-size:0.78rem">${l.car}</td>
+        <td style="color:var(--amber);font-size:0.82rem;font-weight:600">${l.carPrice||''}</td>
+        <td style="font-size:0.75rem;color:var(--text-muted)">${l.contactTime}</td>
+        <td style="font-size:0.75rem;color:var(--text-muted);white-space:nowrap">${l.date}</td>
+        <td>
+          <select class="crm-select" onchange="updateStatus(${l.id},this.value)">
+            <option value="hot"  ${l.status==='hot' ?'selected':''}>🔥 Hot</option>
+            <option value="warm" ${l.status==='warm'?'selected':''}>⚡ Warm</option>
+            <option value="cold" ${l.status==='cold'?'selected':''}>❄️ Cold</option>
+            <option value="sold" ${l.status==='sold'?'selected':''}>✅ Sold</option>
+          </select>
+        </td>
+        <td><input class="crm-note" type="text" value="${l.notes||''}" placeholder="Add note..." onblur="updateNote(${l.id},this.value)"></td>
+        <td>
+          <button class="crm-action-btn" onclick="window.open('tel:${l.phone}')">📞 Call</button>
+          <button class="crm-action-btn" onclick="openSendEmail('${l.id}')" style="color:#60A8F0;border-color:rgba(96,168,240,0.3)">📧 Email</button>
+          <button class="crm-action-btn" onclick="openSendSMS('${l.id}')" style="color:#9B8AF5;border-color:rgba(155,138,245,0.3)">💬 SMS</button>
+          <button class="crm-action-btn" onclick="deleteLead(${l.id})" style="color:#F07070">🗑️</button>
+        </td>
+      </tr>`).join('');
+  }
+
+  function filterLeads(f, el) {
+    document.querySelectorAll('#crm-filter-tabs .filter-tab').forEach(t=>t.classList.remove('active'));
+    if(el) el.classList.add('active'); renderCRM(f);
+  }
+
+  function searchLeads(q) {
+    const filtered = leads.filter(l=>`${l.name} ${l.phone} ${l.email} ${l.car}`.toLowerCase().includes(q.toLowerCase()));
+    const tbody = document.getElementById('crm-tbody');
+    const empty = document.getElementById('crm-empty');
+    if(filtered.length===0){tbody.innerHTML='';empty.style.display='block';return;}
+    empty.style.display='none';
+    tbody.innerHTML = filtered.map(l=>`<tr><td><strong>${l.name}</strong></td><td><a href="tel:${l.phone}" style="color:var(--amber);text-decoration:none">${l.phone}</a></td><td style="font-size:0.78rem">${l.email}</td><td style="font-size:0.78rem">${l.car}</td><td style="color:var(--amber);font-size:0.82rem">${l.carPrice||''}</td><td style="font-size:0.75rem;color:var(--text-muted)">${l.contactTime}</td><td style="font-size:0.75rem;color:var(--text-muted)">${l.date}</td><td><span class="crm-badge ${l.status}">${l.status}</span></td><td style="font-size:0.75rem;color:var(--text-muted)">${l.notes||'—'}</td><td><button class="crm-action-btn" onclick="window.open('tel:${l.phone}')">📞</button><button class="crm-action-btn" onclick="emailLead('${l.email}','${l.name}','${l.car}')">✉️</button></td></tr>`).join('');
+  }
+
+  function updateStatus(id, status) { const l=leads.find(x=>x.id===id); if(l){l.status=status;saveAll();renderCRM(crmFilter);} }
+  function updateNote(id, note)     { const l=leads.find(x=>x.id===id); if(l){l.notes=note;saveAll();} }
+  function deleteLead(id)           { if(!confirm('Delete this lead?'))return; leads=leads.filter(l=>l.id!==id); saveAll(); renderCRM(crmFilter); }
+  function clearAllLeads()          { if(!confirm('Delete ALL leads? Cannot be undone.'))return; leads=[]; saveAll(); renderCRM(crmFilter); }
+  function emailLead(email,name,car){ const s=encodeURIComponent(`Following up: ${car}`); const b=encodeURIComponent(`Hi ${name},\n\nThank you for your interest in the ${car}!\n\nBest regards,\nLutz Auto Sales\n(813) 727-6111`); window.open(`mailto:${email}?subject=${s}&body=${b}`); }
+
+  function exportCSV() {
+    if(!leads.length){alert('No leads to export.');return;}
+    const h=['Name','Phone','Email','Car','Price','Contact Time','Date','Status','Notes'];
+    const rows=leads.map(l=>[l.name,l.phone,l.email,l.car,l.carPrice,l.contactTime,l.date,l.status,l.notes||''].map(v=>`"${(v||'').replace(/"/g,'""')}"`).join(','));
+    const csv=[h.join(','),...rows].join('\n');
+    const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+    a.download='lutz_leads_'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
+  }
+
+  /* ── CALCULATOR ── */
+  function updateCalc() {
+    const price=+document.getElementById('calc-price').value, down=+document.getElementById('calc-down').value,
+          term=+document.getElementById('calc-term').value, rate=+document.getElementById('calc-rate').value,
+          trade=+document.getElementById('calc-trade').value;
+    document.getElementById('lbl-price').textContent='$'+price.toLocaleString();
+    document.getElementById('lbl-down').textContent='$'+down.toLocaleString();
+    document.getElementById('lbl-term').textContent=term+' months';
+    document.getElementById('lbl-rate').textContent=rate.toFixed(1)+'%';
+    document.getElementById('lbl-trade').textContent='$'+trade.toLocaleString();
+    const principal=Math.max(0,price-down-trade), mr=rate/100/12;
+    const monthly=mr===0?principal/term:principal*mr*Math.pow(1+mr,term)/(Math.pow(1+mr,term)-1);
+    const total=monthly*term, interest=total-principal;
+    document.getElementById('calc-result').textContent='$'+Math.round(monthly).toLocaleString();
+    document.getElementById('calc-breakdown').innerHTML=`
+      <div class="calc-row"><span>Vehicle Price</span><span>$${price.toLocaleString()}</span></div>
+      <div class="calc-row"><span>Down Payment</span><span>-$${down.toLocaleString()}</span></div>
+      <div class="calc-row"><span>Trade-In</span><span>-$${trade.toLocaleString()}</span></div>
+      <div class="calc-row"><span>Amount Financed</span><span>$${Math.round(principal).toLocaleString()}</span></div>
+      <div class="calc-row"><span>Total Interest</span><span>$${Math.round(interest).toLocaleString()}</span></div>
+      <div class="calc-row total"><span>Total Cost</span><span>$${Math.round(total+down+trade).toLocaleString()}</span></div>`;
+  }
+
+  function buildCalcQuickBtns() {
+    document.getElementById('calc-quick-btns').innerHTML = inventory.slice(0,6).map(c=>`
+      <button class="btn btn-outline" style="font-size:0.72rem;padding:0.3rem 0.7rem" onclick="loadCarToCalc(${c.price})">
+        ${c.emoji} ${c.year} ${c.make} — $${c.price.toLocaleString()}
+      </button>`).join('');
+  }
+
+  function loadCarToCalc(price) {
+    document.getElementById('calc-price').value = price; updateCalc();
+  }
+
+  /* ── LIVE CLOCK ── */
+  function updateClock() {
+    document.getElementById('live-time').textContent = new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  }
+  setInterval(updateClock, 1000); updateClock();
+
+  /* ── TOAST ── */
+  function showToast(msg) {
+    const t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 3000);
+  }
+
+  /* ── AI AUTO-REPLY ── */
+  let aiSettings = JSON.parse(localStorage.getItem('lutz_ai_reply') || '{}');
+
+  function loadAISettings() {
+    if (aiSettings.enabled) {
+      document.getElementById('ai-email-toggle').style.background = 'var(--amber)';
+      document.getElementById('ai-email-thumb').style.left = '22px';
+      document.getElementById('ai-email-badge').textContent = '✅ Enabled';
+      document.getElementById('ai-email-badge').style.color = '#38C87A';
+      document.getElementById('ai-email-badge').style.background = 'rgba(56,200,122,0.15)';
+    }
+    if (aiSettings.smsEnabled) {
+      document.getElementById('ai-sms-toggle').style.background = '#7C6AF5';
+      document.getElementById('ai-sms-thumb').style.left = '22px';
+      document.getElementById('ai-sms-badge').textContent = '✅ Enabled';
+      document.getElementById('ai-sms-badge').style.color = '#9B8AF5';
+      document.getElementById('ai-sms-badge').style.background = 'rgba(124,106,245,0.15)';
+    }
+    if (aiSettings.replyEmail) document.getElementById('ai-reply-email').value = aiSettings.replyEmail;
+    if (aiSettings.instructions) document.getElementById('ai-instructions').value = aiSettings.instructions;
+  }
+
+  function toggleAIEmail() {
+    aiSettings.enabled = !aiSettings.enabled;
+    const toggle = document.getElementById('ai-email-toggle');
+    const thumb = document.getElementById('ai-email-thumb');
+    const badge = document.getElementById('ai-email-badge');
+    if (aiSettings.enabled) {
+      toggle.style.background = 'var(--amber)'; thumb.style.left = '22px';
+      badge.textContent = '✅ Enabled'; badge.style.color = '#38C87A'; badge.style.background = 'rgba(56,200,122,0.15)';
+    } else {
+      toggle.style.background = 'var(--navy-light)'; thumb.style.left = '2px';
+      badge.textContent = 'Disabled'; badge.style.color = 'var(--text-muted)'; badge.style.background = 'rgba(200,216,232,0.1)';
+    }
+    localStorage.setItem('lutz_ai_reply', JSON.stringify(aiSettings));
+  }
+
+  function toggleAISMS() {
+    aiSettings.smsEnabled = !aiSettings.smsEnabled;
+    const toggle = document.getElementById('ai-sms-toggle');
+    const thumb = document.getElementById('ai-sms-thumb');
+    const badge = document.getElementById('ai-sms-badge');
+    if (aiSettings.smsEnabled) {
+      toggle.style.background = '#7C6AF5'; thumb.style.left = '22px';
+      badge.textContent = '✅ Enabled'; badge.style.color = '#9B8AF5'; badge.style.background = 'rgba(124,106,245,0.15)';
+    } else {
+      toggle.style.background = 'var(--navy-light)'; thumb.style.left = '2px';
+      badge.textContent = 'Disabled'; badge.style.color = 'var(--text-muted)'; badge.style.background = 'rgba(200,216,232,0.1)';
+    }
+    localStorage.setItem('lutz_ai_reply', JSON.stringify(aiSettings));
+  }
+
+  function saveAISettings() {
+    aiSettings.replyEmail = document.getElementById('ai-reply-email').value.trim();
+    aiSettings.instructions = document.getElementById('ai-instructions').value.trim();
+    localStorage.setItem('lutz_ai_reply', JSON.stringify(aiSettings));
+    const msg = document.getElementById('ai-save-msg');
+    msg.style.display = 'block'; msg.style.background = 'rgba(56,200,122,0.1)'; msg.style.color = '#38C87A';
+    msg.textContent = '✅ AI settings saved! Auto-replies are ' + (aiSettings.enabled ? 'ACTIVE' : 'disabled') + '.';
+    setTimeout(() => msg.style.display = 'none', 3000);
+    showToast('✅ AI Auto-Reply settings saved!');
+  }
+
+  async function generateExample() {
+    const exEl = document.getElementById('ai-example');
+    exEl.textContent = '🤖 Generating example...';
+    try {
+      const instructions = document.getElementById('ai-instructions').value;
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6', max_tokens: 200,
+          messages: [{ role: 'user', content: `You are a car sales assistant at Lutz Auto Sales in Lutz FL. Instructions: ${instructions}\n\nWrite a SHORT reply (under 80 words) to: Maria, interested in 2017 Toyota Prius v Three at $14,990. Write ONLY the reply text.` }]
+        })
+      });
+      const data = await res.json();
+      exEl.textContent = '"' + (data.content?.[0]?.text || 'Could not generate example. Check your internet connection.') + '"';
+    } catch(e) { exEl.textContent = '❌ Could not connect. Make sure you have internet access.'; }
+  }
+
+  async function sendTestReply() {
+    const cfg = JSON.parse(localStorage.getItem('apex_emailjs') || '{}');
+    const name = document.getElementById('test-name').value;
+    const email = document.getElementById('test-email').value;
+    const car = document.getElementById('test-car').value;
+    const result = document.getElementById('test-result');
+    if (!email) { alert('Please enter your email address.'); return; }
+    if (!cfg.serviceId) { alert('Set up EmailJS in Email & SMS Setup first!'); return; }
+    result.style.display = 'block'; result.style.background = 'rgba(200,216,232,0.08)'; result.style.color = 'var(--silver)'; result.textContent = '🤖 Claude is writing your reply...';
+    try {
+      const instructions = document.getElementById('ai-instructions').value;
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 200,
+          messages: [{ role: 'user', content: `You are a car sales assistant at Lutz Auto Sales. Instructions: ${instructions}\n\nWrite a SHORT personalized reply (under 80 words) to: ${name}, interested in ${car}. Write ONLY the reply text.` }]
+        })
+      });
+      const data = await res.json();
+      const aiMsg = data.content?.[0]?.text || `Hi ${name}! Thanks for your interest in the ${car} at Lutz Auto Sales. We'd love to help! Call us at (813) 727-6111. - Lutz Auto Sales`;
+      if (window.emailjs) {
+        emailjs.init(cfg.publicKey);
+        await emailjs.send(cfg.serviceId, cfg.templateId, { to_name: name, to_email: email, car_name: car, message: aiMsg, subject: `Test: AI Reply for ${car}`, from_name: 'Lutz Auto Sales', reply_to: 'sales@lutzcars.com' });
+        result.style.background = 'rgba(56,200,122,0.1)'; result.style.color = '#38C87A';
+        result.innerHTML = '✅ Test email sent! Check your inbox.<br><br><strong>AI wrote:</strong><br><em style="font-size:0.78rem">' + aiMsg + '</em>';
+      } else { result.style.background = 'rgba(220,60,60,0.1)'; result.style.color = '#F07070'; result.textContent = '❌ EmailJS not loaded. Set it up in Email & SMS Setup first.'; }
+    } catch(e) { result.style.background = 'rgba(220,60,60,0.1)'; result.style.color = '#F07070'; result.textContent = '❌ Error: ' + e.message; }
+  }
+
+  async function sendTestSMS() {
+    const cfg = JSON.parse(localStorage.getItem('apex_twilio') || '{}');
+    const phone = document.getElementById('test-phone').value;
+    const name = document.getElementById('test-name').value;
+    const car = document.getElementById('test-car').value;
+    const result = document.getElementById('test-result');
+    if (!phone) { alert('Please enter your phone number.'); return; }
+    if (!cfg.proxy) { alert('Set up Twilio proxy in Email & SMS Setup first!'); return; }
+    result.style.display = 'block'; result.style.background = 'rgba(200,216,232,0.08)'; result.style.color = 'var(--silver)'; result.textContent = '💬 Sending test SMS...';
+    try {
+      const msg = `Hi ${name}! 👋 This is Lutz Auto Sales. Thanks for your interest in the ${car}. We'd love to help you drive home today! Call (813) 727-6111 or visit us at 17604 N US Hwy 41, Lutz FL. - Lutz Auto Sales`;
+      const r = await fetch(cfg.proxy, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ to: phone, message: msg }) });
+      const d = await r.json();
+      if (d.success) { result.style.background = 'rgba(56,200,122,0.1)'; result.style.color = '#38C87A'; result.textContent = '✅ Test SMS sent to ' + phone + '!'; }
+      else { throw new Error(d.error || 'Unknown error'); }
+    } catch(e) { result.style.background = 'rgba(220,60,60,0.1)'; result.style.color = '#F07070'; result.textContent = '❌ SMS failed: ' + e.message; }
+  }
+
+  /* ── SETTINGS: LOAD SAVED KEYS ── */
+  function loadSettings() {
+    const ejs = JSON.parse(localStorage.getItem('apex_emailjs') || '{}');
+    const tw  = JSON.parse(localStorage.getItem('apex_twilio')  || '{}');
+    if (ejs.serviceId) { document.getElementById('ejs-service').value  = ejs.serviceId; }
+    if (ejs.templateId){ document.getElementById('ejs-template').value = ejs.templateId; }
+    if (ejs.publicKey) { document.getElementById('ejs-pubkey').value   = ejs.publicKey; }
+    if (ejs.fromEmail) { document.getElementById('ejs-from').value     = ejs.fromEmail; }
+    if (tw.sid)        { document.getElementById('twilio-sid').value   = tw.sid; }
+    if (tw.from)       { document.getElementById('twilio-from').value  = tw.from; }
+    if (tw.proxy)      { document.getElementById('twilio-proxy').value = tw.proxy; }
+    updateBadges();
+  }
+
+  function updateBadges() {
+    const ejs = JSON.parse(localStorage.getItem('apex_emailjs') || '{}');
+    const tw  = JSON.parse(localStorage.getItem('apex_twilio')  || '{}');
+    const ejsBadge = document.getElementById('emailjs-status-badge');
+    const twBadge  = document.getElementById('twilio-status-badge');
+    if (ejsBadge) {
+      if (ejs.serviceId && ejs.templateId && ejs.publicKey) {
+        ejsBadge.textContent = '✅ Connected'; ejsBadge.style.background = 'rgba(56,200,122,0.15)'; ejsBadge.style.color = '#38C87A';
+      } else { ejsBadge.textContent = 'Not Connected'; ejsBadge.style.background = 'rgba(200,216,232,0.08)'; ejsBadge.style.color = 'var(--text-muted)'; }
+    }
+    if (twBadge) {
+      if (tw.sid && tw.from) {
+        twBadge.textContent = '✅ Connected'; twBadge.style.background = 'rgba(124,106,245,0.15)'; twBadge.style.color = '#9B8AF5';
+      } else { twBadge.textContent = 'Not Connected'; twBadge.style.background = 'rgba(200,216,232,0.08)'; twBadge.style.color = 'var(--text-muted)'; }
+    }
+  }
+
+  function saveEmailJS() {
+    const cfg = {
+      serviceId:  document.getElementById('ejs-service').value.trim(),
+      templateId: document.getElementById('ejs-template').value.trim(),
+      publicKey:  document.getElementById('ejs-pubkey').value.trim(),
+      fromEmail:  document.getElementById('ejs-from').value.trim(),
+    };
+    if (!cfg.serviceId || !cfg.templateId || !cfg.publicKey) { showSettingsMsg('emailjs-msg','error','Please fill in all three EmailJS fields.'); return; }
+    localStorage.setItem('apex_emailjs', JSON.stringify(cfg));
+    // Init EmailJS
+    if (window.emailjs) emailjs.init(cfg.publicKey);
+    updateBadges();
+    showSettingsMsg('emailjs-msg','success','✅ EmailJS connected! You can now send real emails from the CRM.');
+  }
+
+  function saveTwilio() {
+    const cfg = {
+      sid:   document.getElementById('twilio-sid').value.trim(),
+      token: document.getElementById('twilio-token').value.trim(),
+      from:  document.getElementById('twilio-from').value.trim(),
+      proxy: document.getElementById('twilio-proxy').value.trim(),
+    };
+    if (!cfg.sid || !cfg.from) { showSettingsMsg('twilio-msg','error','Please fill in Account SID and Phone Number.'); return; }
+    localStorage.setItem('apex_twilio', JSON.stringify(cfg));
+    updateBadges();
+    showSettingsMsg('twilio-msg','success', cfg.proxy ? '✅ Twilio connected with proxy! SMS is ready.' : '✅ Twilio saved! Add a Proxy URL to enable actual sending.');
+  }
+
+  function showSettingsMsg(id, type, msg) {
+    const el = document.getElementById(id);
+    el.style.display = 'block';
+    el.style.background = type === 'success' ? 'rgba(56,200,122,0.1)' : 'rgba(220,60,60,0.1)';
+    el.style.color = type === 'success' ? '#38C87A' : '#F07070';
+    el.textContent = msg;
+    setTimeout(() => el.style.display = 'none', 5000);
+  }
+
+  async function testEmail() {
+    const cfg = JSON.parse(localStorage.getItem('apex_emailjs') || '{}');
+    if (!cfg.serviceId) { alert('Save your EmailJS settings first.'); return; }
+    const fakeLead = { name: 'Test Customer', email: cfg.fromEmail || 'test@test.com', car: '2025 Toyota Camry', carPrice: '$32,990' };
+    await sendRealEmail(fakeLead, 'This is a test email from your Lutz Auto Sales CRM. Everything is working!');
+  }
+
+  async function testSMS() {
+    const cfg = JSON.parse(localStorage.getItem('apex_twilio') || '{}');
+    if (!cfg.sid || !cfg.from) { alert('Save your Twilio settings first.'); return; }
+    if (!cfg.proxy) { alert('Add a Proxy Server URL to enable SMS sending.'); return; }
+    showToast('Sending test SMS...');
+    try {
+      const r = await fetch(cfg.proxy, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ to: cfg.from, message: 'Test from Lutz Auto Sales CRM ✅ SMS is working!' }) });
+      const d = await r.json();
+      d.success ? showToast('✅ Test SMS sent!') : showToast('❌ SMS failed: ' + (d.error||'Unknown error'));
+    } catch(e) { showToast('❌ Could not reach proxy server.'); }
+  }
+
+  /* ── SEND EMAIL MODAL ── */
+  let activeSendLeadId = null;
+
+  function openSendEmail(leadId) {
+    const cfg = JSON.parse(localStorage.getItem('apex_emailjs') || '{}');
+    if (!cfg.serviceId || !cfg.templateId || !cfg.publicKey) {
+      if (confirm('EmailJS is not set up yet. Go to Email & SMS Setup now?')) showPanel('settings', null);
+      return;
+    }
+    const lead = leads.find(l => l.id == leadId);
+    activeSendLeadId = leadId;
+    showCompositor('email', lead);
+  }
+
+  function openSendSMS(leadId) {
+    const cfg = JSON.parse(localStorage.getItem('apex_twilio') || '{}');
+    if (!cfg.sid || !cfg.proxy) {
+      if (confirm('Twilio SMS is not set up yet. Go to Email & SMS Setup now?')) showPanel('settings', null);
+      return;
+    }
+    const lead = leads.find(l => l.id == leadId);
+    activeSendLeadId = leadId;
+    showCompositor('sms', lead);
+  }
+
+  function showCompositor(type, lead) {
+    const existing = document.getElementById('compositor-overlay');
+    if (existing) existing.remove();
+
+    const isEmail = type === 'email';
+    const defaultMsg = isEmail
+      ? `Hi ${lead.name},\n\nThank you for your interest in the ${lead.car} at Lutz Auto Sales!\n\nWe'd love to schedule a test drive or answer any questions you have.\n\nBest regards,\nLutz Auto Sales Team\n📞 (813) 727-6111`
+      : `Hi ${lead.name}! 👋 This is Lutz Auto Sales following up on the ${lead.car} you were interested in. Would you like to schedule a test drive? Reply or call us at (813) 727-6111!`;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'compositor-overlay';
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:9000;background:rgba(10,15,30,0.92);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem';
+    overlay.innerHTML = `
+      <div style="background:var(--card-bg);border-radius:14px;border:1px solid rgba(${isEmail?'96,168,240':'124,106,245'},0.3);max-width:520px;width:100%;padding:2rem;position:relative;animation:toastIn 0.25s ease">
+        <button onclick="document.getElementById('compositor-overlay').remove()" style="position:absolute;top:1rem;right:1rem;background:var(--navy-mid);border:none;color:var(--white);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem">✕</button>
+        <div style="font-size:0.72rem;color:${isEmail?'#60A8F0':'#9B8AF5'};font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.25rem">${isEmail?'📧 Send Email':'💬 Send SMS'}</div>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.25rem">To: ${lead.name}</h3>
+        <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:1.25rem">${isEmail ? lead.email : lead.phone} · ${lead.car}</div>
+        ${isEmail ? `<div style="margin-bottom:1rem"><label style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:0.4rem">Subject</label><input id="comp-subject" style="width:100%;background:var(--navy-light);color:var(--white);border:1px solid rgba(200,216,232,0.15);border-radius:5px;padding:0.65rem 0.9rem;font-size:0.88rem;font-family:'Inter',sans-serif" value="Following up on the ${lead.car} at Lutz Auto Sales"></div>` : ''}
+        <div style="margin-bottom:1.25rem">
+          <label style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:0.4rem">Message</label>
+          <textarea id="comp-body" rows="${isEmail?8:5}" style="width:100%;background:var(--navy-light);color:var(--white);border:1px solid rgba(200,216,232,0.15);border-radius:5px;padding:0.75rem;font-size:0.85rem;font-family:'Inter',sans-serif;resize:vertical">${defaultMsg}</textarea>
+        </div>
+        <div style="display:flex;gap:0.75rem">
+          <button onclick="${isEmail?'confirmSendEmail()':'confirmSendSMS()'}" style="flex:1;background:${isEmail?'#60A8F0':'#7C6AF5'};color:#fff;font-size:0.9rem;font-weight:700;padding:0.8rem;border-radius:5px;border:none;cursor:pointer;text-transform:uppercase;letter-spacing:0.05em">${isEmail?'📧 Send Email':'💬 Send SMS'}</button>
+          <button onclick="document.getElementById('compositor-overlay').remove()" style="background:transparent;color:var(--silver);border:1px solid rgba(200,216,232,0.2);font-size:0.85rem;font-weight:600;padding:0.8rem 1.25rem;border-radius:5px;cursor:pointer">Cancel</button>
+        </div>
+        <div id="comp-status" style="display:none;margin-top:0.75rem;font-size:0.83rem;padding:0.6rem 1rem;border-radius:6px;text-align:center"></div>
+      </div>`;
+    document.body.appendChild(overlay);
+  }
+
+  async function confirmSendEmail() {
+    const lead = leads.find(l => l.id == activeSendLeadId);
+    const msg  = document.getElementById('comp-body').value;
+    const subj = document.getElementById('comp-subject')?.value || `Following up on the ${lead.car}`;
+    const status = document.getElementById('comp-status');
+    status.style.display = 'block'; status.style.background = 'rgba(200,216,232,0.08)'; status.style.color = 'var(--silver)'; status.textContent = '📤 Sending...';
+    const ok = await sendRealEmail(lead, msg, subj);
+    if (ok) {
+      status.style.background = 'rgba(56,200,122,0.1)'; status.style.color = '#38C87A'; status.textContent = '✅ Email sent successfully!';
+      lead.notes = (lead.notes||'') + ` [Email sent ${new Date().toLocaleDateString()}]`; saveAll();
+      setTimeout(() => document.getElementById('compositor-overlay')?.remove(), 2000);
+    } else {
+      status.style.background = 'rgba(220,60,60,0.1)'; status.style.color = '#F07070'; status.textContent = '❌ Failed to send. Check your EmailJS settings.';
+    }
+  }
+
+  async function sendRealEmail(lead, message, subject) {
+    const cfg = JSON.parse(localStorage.getItem('apex_emailjs') || '{}');
+    if (!window.emailjs) { showToast('❌ EmailJS library not loaded.'); return false; }
+    try {
+      emailjs.init(cfg.publicKey);
+      await emailjs.send(cfg.serviceId, cfg.templateId, {
+        to_name:  lead.name,
+        to_email: lead.email,
+        car_name: lead.car,
+        car_price: lead.carPrice || '',
+        message:  message,
+        subject:  subject || `Following up on ${lead.car}`,
+        from_name: 'Lutz Auto Sales',
+        reply_to: cfg.fromEmail || 'sales@lutzcars.com',
+      });
+      showToast('✅ Email sent to ' + lead.name + '!');
+      return true;
+    } catch(e) { console.error(e); return false; }
+  }
+
+  async function confirmSendSMS() {
+    const lead  = leads.find(l => l.id == activeSendLeadId);
+    const msg   = document.getElementById('comp-body').value;
+    const cfg   = JSON.parse(localStorage.getItem('apex_twilio') || '{}');
+    const status = document.getElementById('comp-status');
+    if (!cfg.proxy) { status.style.display='block'; status.style.background='rgba(220,60,60,0.1)'; status.style.color='#F07070'; status.textContent='❌ No proxy URL set. Go to Email & SMS Setup.'; return; }
+    status.style.display='block'; status.style.background='rgba(200,216,232,0.08)'; status.style.color='var(--silver)'; status.textContent='📤 Sending SMS...';
+    try {
+      const r = await fetch(cfg.proxy, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ to: lead.phone, message: msg }) });
+      const d = await r.json();
+      if (d.success) {
+        status.style.background='rgba(56,200,122,0.1)'; status.style.color='#38C87A'; status.textContent='✅ SMS sent to ' + lead.phone + '!';
+        lead.notes = (lead.notes||'') + ` [SMS sent ${new Date().toLocaleDateString()}]`; saveAll();
+        showToast('✅ SMS sent to ' + lead.name + '!');
+        setTimeout(() => document.getElementById('compositor-overlay')?.remove(), 2000);
+      } else { throw new Error(d.error); }
+    } catch(e) { status.style.background='rgba(220,60,60,0.1)'; status.style.color='#F07070'; status.textContent='❌ SMS failed: ' + (e.message||'Check proxy server.'); }
+  }
+
+  function showProxyCode() {
+    const box = document.getElementById('proxy-code-box');
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function copyProxyCode() {
+    const code = document.getElementById('proxy-code').textContent;
+    navigator.clipboard.writeText(code).then(() => showToast('✅ Proxy code copied!'));
+  }
+
+  /* ── PHOTO HANDLING ── */
+  function previewPhoto(url) {
+    if (!url) { document.getElementById('photo-preview-wrap').style.display='none'; return; }
+    const img = document.getElementById('photo-preview');
+    img.src = url;
+    img.onload = () => document.getElementById('photo-preview-wrap').style.display = 'block';
+    img.onerror = () => document.getElementById('photo-preview-wrap').style.display = 'none';
+  }
+
+  function handlePhotoUpload(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const dataUrl = e.target.result;
+      document.getElementById('a-photo-url').value = dataUrl;
+      document.getElementById('photo-preview').src = dataUrl;
+      document.getElementById('photo-preview-wrap').style.display = 'block';
+      showToast('✅ Photo uploaded! It will show on the car card.');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function logout() {
+    sessionStorage.removeItem('lutz_admin_auth');
+    document.getElementById('lock-screen').style.display = 'flex';
+    document.getElementById('pw-input').value = '';
+    failedAttempts = 0;
+  }
+
+  /* ── PASSWORD LOCK ── */
+  const ADMIN_PASSWORD = 'Lutz2024!'; // 🔑 CHANGE THIS TO YOUR PASSWORD
+  let failedAttempts = 0;
+  let lockedOut = false;
+
+  function checkPassword() {
+    if (lockedOut) return;
+    const input = document.getElementById('pw-input').value;
+    const errorEl = document.getElementById('pw-error');
+    const lockedEl = document.getElementById('pw-locked');
+
+    if (input === ADMIN_PASSWORD) {
+      // Correct — unlock
+      document.getElementById('lock-screen').style.display = 'none';
+      failedAttempts = 0;
+      sessionStorage.setItem('lutz_admin_auth', 'true');
+    } else {
+      // Wrong password
+      failedAttempts++;
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').style.borderColor = '#F07070';
+      setTimeout(() => document.getElementById('pw-input').style.borderColor = 'rgba(200,216,232,0.2)', 1000);
+
+      if (failedAttempts >= 3) {
+        // Lock out for 30 seconds after 3 wrong attempts
+        lockedOut = true;
+        errorEl.style.display = 'none';
+        lockedEl.style.display = 'block';
+        let seconds = 30;
+        document.getElementById('lockdown-timer').textContent = seconds;
+        const countdown = setInterval(() => {
+          seconds--;
+          document.getElementById('lockdown-timer').textContent = seconds;
+          if (seconds <= 0) {
+            clearInterval(countdown);
+            lockedOut = false;
+            failedAttempts = 0;
+            lockedEl.style.display = 'none';
+          }
+        }, 1000);
+      } else {
+        errorEl.style.display = 'block';
+        errorEl.textContent = `❌ Incorrect password. ${3 - failedAttempts} attempt${3 - failedAttempts === 1 ? '' : 's'} remaining.`;
+      }
+    }
+  }
+
+  // Check if already authenticated this session
+  if (sessionStorage.getItem('lutz_admin_auth') === 'true') {
+    document.getElementById('lock-screen').style.display = 'none';
+  }
+
+  // Focus password field on load
+  window.addEventListener('load', () => {
+    document.getElementById('pw-input')?.focus();
+  });
+
+  /* ── INIT ── */
+  renderDashboard();
+  renderInventoryTable();
+  updateCalc();
+  loadSettings();
 </script>
-<footer>
-  <div class="footer-inner">
-    <div>
-      <img src="https://cdn.powersports.com/cdn-cgi/image/h=540,w=720/A7F889EDA6964462608D85D22B4E9021.png" alt="Lutz Auto Sales" style="height:55px;filter:brightness(0) invert(1);margin-bottom:0.75rem;display:block">
-      <p style="font-size:0.8rem;color:#aaa;line-height:1.65;max-width:260px">Your trusted used car dealership in Lutz, FL. Quality vehicles, transparent pricing, all credit welcome.</p>
-    </div>
-    <div class="footer-col">
-      <h5>Inventory</h5>
-      <a href="inventory.html">All Vehicles</a>
-      <a href="inventory.html?make=Toyota">Toyota</a>
-      <a href="inventory.html?make=Honda">Honda</a>
-      <a href="inventory.html?type=Truck">Trucks</a>
-      <a href="inventory.html?type=SUV">SUVs</a>
-    </div>
-    <div class="footer-col">
-      <h5>Finance</h5>
-      <a href="credit-application.html">Apply Online</a>
-      <a href="value-my-trade.html">Value My Trade</a>
-      <a href="credit-application.html">Bad Credit OK</a>
-    </div>
-    <div class="footer-col">
-      <h5>Company</h5>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a>
-      <a href="prius-services.html">Prius Services</a>
-      <a href="schedule-test-drive.html">Test Drive</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 Lutz Auto Sales · 17604 N US Hwy 41 Unit 1, Lutz FL 33549 · <a href="tel:8137276111">(813) 727-6111</a></p>
-    <p><a href="#">Privacy Policy</a> · <a href="#">Terms</a></p>
-  </div>
-</footer>
-<a class="float-btn" href="credit-application.html">💳 Apply Now</a>
-<script src="_shared.js"></script>
-</body></html>
+</body>
+</html>
