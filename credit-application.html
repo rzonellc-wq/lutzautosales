@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lutz Auto Sales — Auto Loan Credit Application</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A0F1E; --navy-mid: #1C2333; --navy-light: #2A3450;
+    --silver: #C8D8E8; --amber: #E8A020; --amber-light: #F5C060;
+    --white: #F8F9FC; --text-muted: #7A8BA0; --card-bg: #141929;
+    --green: #38C87A;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white); min-height: 100vh; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,15,30,0.96); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,216,232,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 68px;
+  }
+  .nav-logo { font-family: 'Barlow Condensed',sans-serif; font-size: 1.7rem; font-weight: 900; text-decoration: none; color: var(--white); }
+  .nav-logo span { color: var(--amber); }
+  .nav-back { font-size: 0.82rem; color: var(--text-muted); text-decoration: none; border: 1px solid rgba(200,216,232,0.15); padding: 0.4rem 0.9rem; border-radius: 4px; transition: all 0.2s; }
+  .nav-back:hover { color: var(--white); border-color: var(--silver); }
+
+  /* HERO BANNER */
+  .app-hero {
+    background: linear-gradient(135deg, var(--navy-mid) 0%, #0E1525 100%);
+    border-bottom: 1px solid rgba(200,216,232,0.07);
+    padding: 3rem 5%; text-align: center;
+  }
+  .app-hero-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; color: var(--amber); text-transform: uppercase; margin-bottom: 0.75rem; }
+  .app-hero-title { font-family: 'Barlow Condensed',sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; margin-bottom: 0.75rem; }
+  .app-hero-title em { font-style: normal; color: var(--amber); }
+  .app-hero-sub { font-size: 0.95rem; color: var(--silver); max-width: 560px; margin: 0 auto 1.5rem; line-height: 1.65; }
+  .trust-strip { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+  .trust-item { font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem; }
+  .trust-item span { color: var(--green); font-size: 1rem; }
+
+  /* PROGRESS BAR */
+  .progress-wrap { background: var(--navy-mid); border-bottom: 1px solid rgba(200,216,232,0.07); padding: 1.25rem 5%; }
+  .progress-steps { display: flex; align-items: center; max-width: 700px; margin: 0 auto; }
+  .progress-step { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
+  .progress-step:not(:last-child)::after { content: ''; position: absolute; top: 14px; left: 55%; width: 90%; height: 2px; background: rgba(200,216,232,0.15); z-index: 0; }
+  .progress-step.done::after { background: var(--amber); }
+  .step-circle { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; z-index: 1; border: 2px solid rgba(200,216,232,0.2); background: var(--navy-mid); color: var(--text-muted); transition: all 0.3s; }
+  .progress-step.active .step-circle { background: var(--amber); color: var(--navy); border-color: var(--amber); }
+  .progress-step.done .step-circle { background: var(--green); color: #fff; border-color: var(--green); }
+  .step-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; margin-top: 0.4rem; text-align: center; }
+  .progress-step.active .step-label { color: var(--amber); }
+  .progress-step.done .step-label { color: var(--green); }
+
+  /* MAIN LAYOUT */
+  .app-layout { display: flex; gap: 2rem; max-width: 1100px; margin: 0 auto; padding: 2.5rem 5%; align-items: flex-start; }
+  .app-form-col { flex: 1; }
+  .app-sidebar { width: 280px; flex-shrink: 0; position: sticky; top: 90px; }
+
+  /* SECTION CARD */
+  .form-section { background: var(--card-bg); border-radius: 12px; border: 1px solid rgba(200,216,232,0.08); margin-bottom: 1.5rem; overflow: hidden; }
+  .form-section-header { padding: 1.1rem 1.5rem; border-bottom: 1px solid rgba(200,216,232,0.08); display: flex; align-items: center; gap: 0.75rem; }
+  .section-icon { font-size: 1.2rem; }
+  .section-title { font-family: 'Barlow Condensed',sans-serif; font-size: 1.15rem; font-weight: 800; }
+  .section-subtitle { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.1rem; }
+  .form-section-body { padding: 1.5rem; }
+
+  /* FORM FIELDS */
+  .f-row { display: grid; gap: 1rem; margin-bottom: 1rem; }
+  .f-row.col-2 { grid-template-columns: 1fr 1fr; }
+  .f-row.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .f-row.col-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .f-row.col-1-2 { grid-template-columns: 1fr 2fr; }
+  .f-row.col-2-1 { grid-template-columns: 2fr 1fr; }
+  .f-group { display: flex; flex-direction: column; gap: 0.35rem; }
+  .f-group label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; }
+  .f-group label .req { color: var(--amber); margin-left: 2px; }
+  .f-group input, .f-group select, .f-group textarea {
+    background: var(--navy-light); color: var(--white);
+    border: 1px solid rgba(200,216,232,0.14); border-radius: 5px;
+    padding: 0.65rem 0.85rem; font-size: 0.88rem; font-family: 'Inter',sans-serif;
+    transition: border-color 0.2s; width: 100%;
+  }
+  .f-group input:focus, .f-group select:focus, .f-group textarea:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 3px rgba(232,160,32,0.1); }
+  .f-group input::placeholder { color: var(--text-muted); }
+  .f-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A8BA0' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; padding-right: 2rem; cursor: pointer; }
+  .f-hint { font-size: 0.68rem; color: var(--text-muted); margin-top: 0.2rem; font-style: italic; }
+  .f-divider { border: none; border-top: 1px solid rgba(200,216,232,0.08); margin: 1.25rem 0; }
+
+  /* SUBSECTION HEADER */
+  .sub-header { font-family: 'Barlow Condensed',sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--silver); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(200,216,232,0.07); letter-spacing: 0.03em; }
+
+  /* CO-BUYER TOGGLE */
+  .toggle-section { background: var(--navy-mid); border-radius: 8px; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; cursor: pointer; border: 1px solid rgba(200,216,232,0.1); transition: border-color 0.2s; }
+  .toggle-section:hover { border-color: rgba(232,160,32,0.3); }
+  .toggle-label { font-size: 0.88rem; font-weight: 600; }
+  .toggle-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem; }
+  .toggle-switch { width: 44px; height: 24px; background: var(--navy-light); border-radius: 12px; position: relative; transition: background 0.3s; flex-shrink: 0; border: 1px solid rgba(200,216,232,0.2); }
+  .toggle-switch.on { background: var(--amber); border-color: var(--amber); }
+  .toggle-switch::after { content: ''; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: #fff; top: 2px; left: 2px; transition: left 0.3s; }
+  .toggle-switch.on::after { left: 22px; }
+  .cobyer-fields { display: none; }
+  .cobyer-fields.open { display: block; }
+
+  /* CONSENT BOX */
+  .consent-box { background: var(--navy-mid); border-radius: 8px; padding: 1.25rem; border: 1px solid rgba(200,216,232,0.1); margin-bottom: 1.25rem; }
+  .consent-text { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; }
+  .consent-check { display: flex; align-items: flex-start; gap: 0.75rem; margin-top: 1rem; cursor: pointer; }
+  .consent-check input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--amber); cursor: pointer; flex-shrink: 0; margin-top: 1px; }
+  .consent-check-label { font-size: 0.82rem; font-weight: 600; line-height: 1.5; }
+
+  /* SUBMIT BUTTON */
+  .submit-btn { width: 100%; background: var(--amber); color: var(--navy); font-size: 1rem; font-weight: 800; letter-spacing: 0.06em; padding: 1rem; border-radius: 6px; border: none; cursor: pointer; text-transform: uppercase; transition: background 0.2s, transform 0.15s; margin-top: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+  .submit-btn:hover { background: var(--amber-light); transform: translateY(-2px); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* SUCCESS STATE */
+  .success-state { display: none; text-align: center; padding: 3rem 2rem; }
+  .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+  .success-title { font-family: 'Barlow Condensed',sans-serif; font-size: 2.2rem; font-weight: 900; margin-bottom: 0.75rem; }
+  .success-sub { font-size: 0.95rem; color: var(--silver); line-height: 1.65; margin-bottom: 1.5rem; }
+  .success-ref { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* SIDEBAR CARDS */
+  .sidebar-card { background: var(--card-bg); border-radius: 10px; border: 1px solid rgba(200,216,232,0.08); padding: 1.25rem; margin-bottom: 1.25rem; }
+  .sidebar-card-title { font-family: 'Barlow Condensed',sans-serif; font-size: 1rem; font-weight: 800; margin-bottom: 0.85rem; }
+  .sidebar-item-row { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.65rem; font-size: 0.82rem; color: var(--silver); }
+  .sidebar-item-row .icon { font-size: 1rem; flex-shrink: 0; }
+  .sidebar-contact-btn { display: flex; align-items: center; gap: 0.5rem; background: var(--navy-mid); border-radius: 6px; padding: 0.65rem 0.9rem; text-decoration: none; color: var(--white); font-size: 0.82rem; font-weight: 600; margin-bottom: 0.5rem; border: 1px solid rgba(200,216,232,0.1); transition: border-color 0.2s; }
+  .sidebar-contact-btn:hover { border-color: var(--amber); }
+  .doc-list li { font-size: 0.8rem; color: var(--silver); margin-bottom: 0.5rem; list-style: none; display: flex; gap: 0.5rem; }
+  .doc-list li::before { content: '📄'; flex-shrink: 0; }
+
+  /* FIELD ERROR */
+  .f-group.error input, .f-group.error select { border-color: #F07070; }
+  .f-error-msg { font-size: 0.68rem; color: #F07070; margin-top: 0.2rem; display: none; }
+  .f-group.error .f-error-msg { display: block; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .app-layout { flex-direction: column; }
+    .app-sidebar { width: 100%; position: static; }
+  }
+  @media (max-width: 600px) {
+    .f-row.col-2, .f-row.col-3, .f-row.col-4, .f-row.col-1-2, .f-row.col-2-1 { grid-template-columns: 1fr; }
+    .progress-steps { gap: 0; }
+    .step-label { display: none; }
+    .trust-strip { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">LUTZ <span>AUTO SALES</span></a>
+  <a class="nav-back" href="index.html">← Back to Site</a>
+</nav>
+
+<!-- HERO -->
+<div class="app-hero">
+  <div class="app-hero-eyebrow">100% Secure · No Obligation</div>
+  <h1 class="app-hero-title">Auto Loan <em>Credit Application</em></h1>
+  <p class="app-hero-sub">Complete this short form and our finance team will find you the best rate from 40+ lenders — regardless of your credit history.</p>
+  <div class="trust-strip">
+    <div class="trust-item"><span>✓</span> All Credit Welcome</div>
+    <div class="trust-item"><span>✓</span> Response Within 4 Hours</div>
+    <div class="trust-item"><span>✓</span> 256-bit Encrypted</div>
+    <div class="trust-item"><span>✓</span> No Obligation</div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-steps">
+    <div class="progress-step active" id="step1">
+      <div class="step-circle">1</div>
+      <div class="step-label">Vehicle</div>
+    </div>
+    <div class="progress-step" id="step2">
+      <div class="step-circle">2</div>
+      <div class="step-label">Personal</div>
+    </div>
+    <div class="progress-step" id="step3">
+      <div class="step-circle">3</div>
+      <div class="step-label">Employment</div>
+    </div>
+    <div class="progress-step" id="step4">
+      <div class="step-circle">4</div>
+      <div class="step-label">Loan Terms</div>
+    </div>
+    <div class="progress-step" id="step5">
+      <div class="step-circle">5</div>
+      <div class="step-label">Submit</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="app-layout">
+
+  <!-- FORM COLUMN -->
+  <div class="app-form-col">
+    <form id="credit-form" onsubmit="submitApp(event)" novalidate>
+
+      <!-- ── 1. VEHICLE INFORMATION ── -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <div class="section-icon">🚗</div>
+          <div>
+            <div class="section-title">Vehicle Information</div>
+            <div class="section-subtitle">Which vehicle are you interested in financing?</div>
+          </div>
+        </div>
+        <div class="form-section-body">
+          <div class="f-row col-1">
+            <div class="f-group">
+              <label>Vehicle of Interest</label>
+              <select id="v-vehicle">
+                <option value="">— Select from our current inventory —</option>
+                <option>2025 Toyota Camry XSE — $32,990</option>
+                <option>2023 Honda CR-V Sport — $28,500</option>
+                <option>2022 Ford F-150 XLT (CPO) — $41,900</option>
+                <option>2025 Hyundai Tucson SEL Hybrid — $34,200</option>
+                <option>2021 Chevrolet Silverado LT — $35,800</option>
+                <option>2023 BMW 330i xDrive (CPO) — $47,900</option>
+                <option>I'm open to suggestions</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-row col-3">
+            <div class="f-group"><label>VIN (if known)</label><input id="v-vin" type="text" maxlength="17" placeholder="17-character VIN" oninput="this.value=this.value.toUpperCase()"></div>
+            <div class="f-group"><label>Year</label><input id="v-year" type="number" min="1990" max="2026" placeholder="2025"></div>
+            <div class="f-group"><label>Make</label><input id="v-make" type="text" placeholder="Toyota"></div>
+          </div>
+          <div class="f-row col-3">
+            <div class="f-group"><label>Model</label><input id="v-model" type="text" placeholder="Camry"></div>
+            <div class="f-group"><label>Vehicle Price ($)</label><input id="v-price" type="number" placeholder="32990"></div>
+            <div class="f-group"><label>Mileage</label><input id="v-miles" type="number" placeholder="12000"></div>
+          </div>
+
+          <hr class="f-divider">
+          <div class="sub-header">Trade-In Vehicle (Optional)</div>
+
+          <div class="toggle-section" onclick="toggleTradeIn()">
+            <div>
+              <div class="toggle-label">I have a trade-in vehicle</div>
+              <div class="toggle-sub">Adding a trade-in can reduce your loan amount</div>
+            </div>
+            <div class="toggle-switch" id="tradein-toggle"></div>
+          </div>
+
+          <div id="tradein-fields" class="cobyer-fields">
+            <div class="f-row col-3">
+              <div class="f-group"><label>Trade-In Year</label><input id="t-year" type="number" placeholder="2019"></div>
+              <div class="f-group"><label>Trade-In Make</label><input id="t-make" type="text" placeholder="Honda"></div>
+              <div class="f-group"><label>Trade-In Model</label><input id="t-model" type="text" placeholder="Accord"></div>
+            </div>
+            <div class="f-row col-3">
+              <div class="f-group"><label>Trade-In Mileage</label><input id="t-miles" type="number" placeholder="65000"></div>
+              <div class="f-group"><label>Trade-In VIN</label><input id="t-vin" type="text" placeholder="Optional"></div>
+              <div class="f-group"><label>Estimated Value ($)</label><input id="t-value" type="number" placeholder="8000"></div>
+            </div>
+            <div class="f-row col-1">
+              <div class="f-group"><label>Amount Owed on Trade-In ($)</label><input id="t-owed" type="number" placeholder="0 if paid off"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 2. PERSONAL INFORMATION ── -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <div class="section-icon">👤</div>
+          <div>
+            <div class="section-title">Personal Information</div>
+            <div class="section-subtitle">Your contact and identification details</div>
+          </div>
+        </div>
+        <div class="form-section-body">
+          <div class="sub-header">Contact Information</div>
+          <div class="f-row col-1-2">
+            <div class="f-group"><label>First Name <span class="req">*</span></label><input id="p-first" type="text" placeholder="Maria" required><div class="f-error-msg">Required</div></div>
+            <div class="f-group"><label>Last Name <span class="req">*</span></label><input id="p-last" type="text" placeholder="Garcia" required><div class="f-error-msg">Required</div></div>
+          </div>
+          <div class="f-row col-3">
+            <div class="f-group"><label>Middle Initial</label><input id="p-mi" type="text" maxlength="1" placeholder="M"></div>
+            <div class="f-group"><label>Date of Birth <span class="req">*</span></label><input id="p-dob" type="date" required><div class="f-error-msg">Required</div></div>
+            <div class="f-group"><label>Social Security # <span class="req">*</span></label><input id="p-ssn" type="password" maxlength="11" placeholder="XXX-XX-XXXX" required><div class="f-error-msg">Required</div><div class="f-hint">🔒 Encrypted & secure</div></div>
+          </div>
+          <div class="f-row col-2">
+            <div class="f-group"><label>Phone Number <span class="req">*</span></label><input id="p-phone" type="tel" placeholder="(813) 727-6111" required><div class="f-error-msg">Required</div></div>
+            <div class="f-group"><label>Phone Type</label>
+              <select id="p-phone-type">
+                <option value="">Select Phone Type</option>
+                <option>Cell</option><option>Home</option><option>Work</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-row col-1">
+            <div class="f-group"><label>Email Address <span class="req">*</span></label><input id="p-email" type="email" placeholder="maria@email.com" required><div class="f-error-msg">Please enter a valid email</div></div>
+          </div>
+
+          <hr class="f-divider">
+          <div class="sub-header">Driver's License</div>
+          <div class="f-row col-2">
+            <div class="f-group"><label>Driver's License Number <span class="req">*</span></label><input id="p-dl" type="text" placeholder="FL D123456789012" required><div class="f-error-msg">Required</div></div>
+            <div class="f-group"><label>Issuing State</label>
+              <select id="p-dl-state">
+                <option value="">Select State</option>
+                <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+                <option>CO</option><option>CT</option><option>DC</option><option>DE</option><option selected>FL</option>
+                <option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option>
+                <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+                <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
+                <option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option>
+                <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+                <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-row col-3">
+            <div class="f-group"><label>Issue Date</label><input id="p-dl-issue" type="date"></div>
+            <div class="f-group"><label>Expiration Date</label><input id="p-dl-exp" type="date"></div>
+            <div class="f-group"><label>License County</label><input id="p-dl-county" type="text" placeholder="Hillsborough"></div>
+          </div>
+
+          <hr class="f-divider">
+          <div class="sub-header">Current Address</div>
+          <div class="f-row col-1">
+            <div class="f-group"><label>Street Address <span class="req">*</span></label><input id="p-addr1" type="text" placeholder="123 Main Street" required><div class="f-error-msg">Required</div></div>
+          </div>
+          <div class="f-row col-1">
+            <div class="f-group"><label>Address Line 2</label><input id="p-addr2" type="text" placeholder="Apt, Suite, Unit (optional)"></div>
+          </div>
+          <div class="f-row col-3">
+            <div class="f-group"><label>City <span class="req">*</span></label><input id="p-city" type="text" placeholder="Tampa" required><div class="f-error-msg">Required</div></div>
+            <div class="f-group"><label>State <span class="req">*</span></label>
+              <select id="p-state" required>
+                <option value="">State</option>
+                <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+                <option>CO</option><option>CT</option><option>DC</option><option>DE</option><option selected>FL</option>
+                <option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option>
+                <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+                <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
+                <option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option>
+                <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+                <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+              </select>
+              <div class="f-error-msg">Required</div>
+            </div>
+            <div class="f-group"><label>ZIP Code <span class="req">*</span></label><input id="p-zip" type="text" maxlength="5" placeholder="33549" required><div class="f-error-msg">Required</div></div>
+          </div>
+          <div class="f-row col-2">
+            <div class="f-group"><label>Residence Type</label>
+              <select id="p-res-type">
+                <option value="">Select Residence Type</option>
+                <option>Own</option><option>Rent</option><option>Live with Family</option><option>Other</option>
+              </select>
+            </div>
+            <div class="f-group"><label>Monthly Rent/Mortgage ($)</label><input id="p-rent" type="number" placeholder="1200"></div>
+          </div>
+          <div class="f-row col-2">
+            <div class="f-group"><label>Years at Residence</label><input id="p-res-years" type="number" min="0" max="80" placeholder="3"></div>
+            <div class="f-group"><label>Months at Residence</label><input id="p-res-months" type="number" min="0" max="11" placeholder="6"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 3. EMPLOYMENT ── -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <div class="section-icon">💼</div>
+          <div>
+            <div class="section-title">Employment & Income</div>
+            <div class="section-subtitle">Your current employment and income information</div>
+          </div>
+        </div>
+        <div class="form-section-body">
+          <div class="f-row col-2">
+            <div class="f-group"><label>Employment Status <span class="req">*</span></label>
+              <select id="e-status" required onchange="toggleSelfEmployed()">
+                <option value="">Select Employment Status</option>
+                <option>Full Time</option><option>Part Time</option><option>Contract</option>
+                <option>Seasonal</option><option>Self-Employed</option><option>Temporary</option>
+                <option>Military</option><option>Retired</option><option>Not Applicable</option>
+              </select>
+              <div class="f-error-msg">Required</div>
+            </div>
+            <div class="f-group"><label>Job Title</label><input id="e-title" type="text" placeholder="Sales Manager"></div>
+          </div>
+          <div id="employer-fields">
+            <div class="f-row col-2-1">
+              <div class="f-group"><label>Employer Name</label><input id="e-employer" type="text" placeholder="ABC Company Inc."></div>
+              <div class="f-group"><label>Employer Phone</label><input id="e-phone" type="tel" placeholder="(813) 727-6111"></div>
+            </div>
+          </div>
+          <div class="f-row col-2">
+            <div class="f-group"><label>Years at Job</label><input id="e-years" type="number" min="0" max="60" placeholder="4"></div>
+            <div class="f-group"><label>Months at Job</label><input id="e-months" type="number" min="0" max="11" placeholder="8"></div>
+          </div>
+          <div class="f-row col-2">
+            <div class="f-group"><label>Gross Income <span class="req">*</span></label><input id="e-income" type="number" placeholder="55000" required><div class="f-error-msg">Required</div></div>
+            <div class="f-group"><label>Income Interval <span class="req">*</span></label>
+              <select id="e-interval" required>
+                <option value="">Select Interval</option>
+                <option>Annually</option><option>Monthly</option><option>Semi-Monthly</option>
+                <option>Bi-Weekly</option><option>Weekly</option>
+              </select>
+              <div class="f-error-msg">Required</div>
+            </div>
+          </div>
+          <div class="f-row col-1">
+            <div class="f-group">
+              <label>Other Monthly Income ($)</label>
+              <input id="e-other-income" type="number" placeholder="0">
+              <div class="f-hint">Alimony, child support, or separate maintenance income need not be revealed if you do not wish to have it considered as a basis for repaying this obligation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 4. CO-BUYER ── -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <div class="section-icon">👥</div>
+          <div>
+            <div class="section-title">Co-Buyer / Co-Signer</div>
+            <div class="section-subtitle">Adding a co-buyer can improve your approval odds and rate</div>
+          </div>
+        </div>
+        <div class="form-section-body">
+          <div class="toggle-section" onclick="toggleCoBuyer()">
+            <div>
+              <div class="toggle-label">Add a co-buyer to this application</div>
+              <div class="toggle-sub">Spouse, family member, or anyone who will share the loan</div>
+            </div>
+            <div class="toggle-switch" id="cobuyer-toggle"></div>
+          </div>
+
+          <div id="cobuyer-fields" class="cobyer-fields">
+            <div class="sub-header" style="margin-top:0.5rem">Co-Buyer Contact Information</div>
+            <div class="f-row col-1-2">
+              <div class="f-group"><label>First Name</label><input id="c-first" type="text" placeholder="Carlos"></div>
+              <div class="f-group"><label>Last Name</label><input id="c-last" type="text" placeholder="Garcia"></div>
+            </div>
+            <div class="f-row col-3">
+              <div class="f-group"><label>Middle Initial</label><input id="c-mi" type="text" maxlength="1" placeholder="A"></div>
+              <div class="f-group"><label>Date of Birth</label><input id="c-dob" type="date"></div>
+              <div class="f-group"><label>Social Security #</label><input id="c-ssn" type="password" maxlength="11" placeholder="XXX-XX-XXXX"><div class="f-hint">🔒 Encrypted & secure</div></div>
+            </div>
+            <div class="f-row col-2">
+              <div class="f-group"><label>Phone</label><input id="c-phone" type="tel" placeholder="(813) 727-6111"></div>
+              <div class="f-group"><label>Email</label><input id="c-email" type="email" placeholder="carlos@email.com"></div>
+            </div>
+            <div class="f-row col-2">
+              <div class="f-group"><label>Driver's License #</label><input id="c-dl" type="text" placeholder="FL D987654321098"></div>
+              <div class="f-group"><label>Issuing State</label>
+                <select id="c-dl-state">
+                  <option value="">Select State</option>
+                  <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+                  <option>CO</option><option>CT</option><option>DC</option><option>DE</option><option selected>FL</option>
+                  <option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option>
+                  <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+                  <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                  <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
+                  <option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option>
+                  <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+                  <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                  <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+                </select>
+              </div>
+            </div>
+            <hr class="f-divider">
+            <div class="sub-header">Co-Buyer Address</div>
+            <div class="f-row col-1">
+              <div class="f-group"><label>Street Address</label><input id="c-addr" type="text" placeholder="Same as applicant or enter new address"></div>
+            </div>
+            <div class="f-row col-3">
+              <div class="f-group"><label>City</label><input id="c-city" type="text" placeholder="Tampa"></div>
+              <div class="f-group"><label>State</label>
+                <select id="c-state">
+                  <option value="">State</option>
+                  <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+                  <option>CO</option><option>CT</option><option>DC</option><option>DE</option><option selected>FL</option>
+                  <option>GA</option><option>HI</option><option>ID</option><option>IL</option><option>IN</option>
+                  <option>IA</option><option>KS</option><option>KY</option><option>LA</option><option>ME</option>
+                  <option>MD</option><option>MA</option><option>MI</option><option>MN</option><option>MS</option>
+                  <option>MO</option><option>MT</option><option>NE</option><option>NV</option><option>NH</option>
+                  <option>NJ</option><option>NM</option><option>NY</option><option>NC</option><option>ND</option>
+                  <option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option>
+                  <option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option>
+                  <option>VT</option><option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+                </select>
+              </div>
+              <div class="f-group"><label>ZIP</label><input id="c-zip" type="text" maxlength="5" placeholder="33549"></div>
+            </div>
+            <div class="f-row col-2">
+              <div class="f-group"><label>Residence Type</label>
+                <select id="c-res-type">
+                  <option value="">Select Type</option>
+                  <option>Own</option><option>Rent</option><option>Live with Family</option><option>Other</option>
+                </select>
+              </div>
+              <div class="f-group"><label>Monthly Rent/Mortgage ($)</label><input id="c-rent" type="number" placeholder="1200"></div>
+            </div>
+            <hr class="f-divider">
+            <div class="sub-header">Co-Buyer Employment</div>
+            <div class="f-row col-2">
+              <div class="f-group"><label>Employment Status</label>
+                <select id="c-emp-status">
+                  <option value="">Select Status</option>
+                  <option>Full Time</option><option>Part Time</option><option>Self-Employed</option>
+                  <option>Retired</option><option>Military</option><option>Not Applicable</option>
+                </select>
+              </div>
+              <div class="f-group"><label>Employer Name</label><input id="c-employer" type="text" placeholder="XYZ Corporation"></div>
+            </div>
+            <div class="f-row col-2">
+              <div class="f-group"><label>Gross Income ($)</label><input id="c-income" type="number" placeholder="45000"></div>
+              <div class="f-group"><label>Income Interval</label>
+                <select id="c-interval">
+                  <option value="">Select Interval</option>
+                  <option>Annually</option><option>Monthly</option><option>Semi-Monthly</option>
+                  <option>Bi-Weekly</option><option>Weekly</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 5. DESIRED LOAN TERMS ── -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <div class="section-icon">💰</div>
+          <div>
+            <div class="section-title">Desired Lending Terms</div>
+            <div class="section-subtitle">Tell us what works best for your budget</div>
+          </div>
+        </div>
+        <div class="form-section-body">
+          <div class="f-row col-2">
+            <div class="f-group"><label>Desired Loan Amount ($)</label><input id="l-amount" type="number" placeholder="29990"></div>
+            <div class="f-group"><label>Down Payment ($)</label><input id="l-down" type="number" placeholder="3000"></div>
+          </div>
+          <div class="f-row col-2">
+            <div class="f-group"><label>Desired Monthly Payment ($)</label><input id="l-monthly" type="number" placeholder="400"></div>
+            <div class="f-group"><label>Loan Term</label>
+              <select id="l-term">
+                <option value="">Select Term</option>
+                <option>24 Months</option><option>36 Months</option><option>48 Months</option>
+                <option>60 Months</option><option>72 Months</option><option>84 Months</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-row col-1">
+            <div class="f-group">
+              <label>Additional Notes or Questions</label>
+              <textarea id="l-notes" rows="3" placeholder="Any special requests, questions, or details you'd like us to know..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CONSENT & SUBMIT ── -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <div class="section-icon">📋</div>
+          <div>
+            <div class="section-title">Authorization & Consent</div>
+            <div class="section-subtitle">Please read and agree before submitting</div>
+          </div>
+        </div>
+        <div class="form-section-body">
+          <div class="consent-box">
+            <div class="consent-text">
+              By submitting this application, I authorize and give Lutz Auto Sales, as well as any potential financing source this dealership presents this application to, my consent to obtain my credit report from any credit reporting agency used to complete an investigation of my credit.<br><br>
+              I certify that all information herein is true and complete. I agree I am providing this information to Lutz Auto Sales and acknowledge that my information may be shared pursuant to the dealer's privacy policy. I hereby authorize this dealer, and any financial institution engaged as a service provider by this dealer, to retain this application and to check and verify my credit, employment and salary history.<br><br>
+              I authorize Lutz Auto Sales and/or financial institutions, as they consider necessary and appropriate, to obtain consumer credit reports on me periodically and to gather employment history in order to determine financing eligibility.
+            </div>
+            <label class="consent-check">
+              <input type="checkbox" id="consent-check" required>
+              <span class="consent-check-label">I have read, understand, and agree to the above authorization and consent terms. <span class="req">*</span></span>
+            </label>
+          </div>
+
+          <div id="form-body">
+            <button type="submit" class="submit-btn" id="submit-btn">
+              🔒 Submit My Credit Application
+            </button>
+            <p style="font-size:0.72rem;color:var(--text-muted);text-align:center;margin-top:0.75rem">
+              Submitting this application does not guarantee approval. A member of our finance team will contact you within 4 business hours.
+            </p>
+          </div>
+
+          <div class="success-state" id="success-state">
+            <div class="success-icon">🎉</div>
+            <div class="success-title">Application Received!</div>
+            <p class="success-sub">Thank you! Your credit application has been securely submitted. Our finance team will review your information and contact you within <strong>4 business hours</strong> with your personalized options.</p>
+            <p class="success-ref" id="success-ref"></p>
+            <div style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+              <a href="index.html" class="submit-btn" style="text-decoration:none;max-width:280px">← Browse More Vehicles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="app-sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">📞 Questions? Call Us</div>
+      <a class="sidebar-contact-btn" href="tel:8137276111"><span>📞</span>(813) 727-6111</a>
+      <a class="sidebar-contact-btn" href="mailto:finance@lutzcars.com"><span>✉️</span>finance@lutzcars.com</a>
+      <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.5rem">Mon–Sat: 9am–8pm · Sun: 11am–5pm</div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">✅ We Accept All Credit</div>
+      <div class="sidebar-item-row"><span class="icon">🟢</span> Excellent Credit (720+)</div>
+      <div class="sidebar-item-row"><span class="icon">🟡</span> Good Credit (660–719)</div>
+      <div class="sidebar-item-row"><span class="icon">🟠</span> Fair Credit (580–659)</div>
+      <div class="sidebar-item-row"><span class="icon">🔴</span> Poor Credit (Below 580)</div>
+      <div class="sidebar-item-row"><span class="icon">⚪</span> No Credit History</div>
+      <div class="sidebar-item-row"><span class="icon">🔄</span> Previous Bankruptcy</div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">📄 Documents to Have Ready</div>
+      <ul class="doc-list">
+        <li>Valid Driver's License</li>
+        <li>Recent Pay Stubs (last 2)</li>
+        <li>Proof of Insurance</li>
+        <li>Proof of Residence (utility bill)</li>
+        <li>Social Security Card</li>
+        <li>Trade-In Title (if applicable)</li>
+        <li>Down Payment</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card" style="background:rgba(232,160,32,0.06);border-color:rgba(232,160,32,0.2)">
+      <div class="sidebar-card-title">🔒 Your Info is Safe</div>
+      <div style="font-size:0.8rem;color:var(--silver);line-height:1.6">
+        This application uses 256-bit SSL encryption. Your personal information is never sold or shared with third parties outside of the financing process.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /app-layout -->
+
+<script>
+  let tradeInOpen = false;
+  let coBuyerOpen = false;
+
+  /* ── TOGGLES ── */
+  function toggleTradeIn() {
+    tradeInOpen = !tradeInOpen;
+    document.getElementById('tradein-toggle').classList.toggle('on', tradeInOpen);
+    document.getElementById('tradein-fields').classList.toggle('open', tradeInOpen);
+  }
+
+  function toggleCoBuyer() {
+    coBuyerOpen = !coBuyerOpen;
+    document.getElementById('cobuyer-toggle').classList.toggle('on', coBuyerOpen);
+    document.getElementById('cobuyer-fields').classList.toggle('open', coBuyerOpen);
+  }
+
+  /* ── PROGRESS TRACKER ── */
+  const requiredFields = [
+    ['p-first','p-last','p-dob','p-ssn','p-phone','p-email','p-dl','p-addr1','p-city','p-state','p-zip'],
+    ['e-status','e-income','e-interval']
+  ];
+
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+
+  function updateProgress() {
+    const vFilled  = document.getElementById('v-vehicle').value || document.getElementById('v-make').value;
+    const pFilled  = ['p-first','p-last','p-phone','p-email'].every(id => document.getElementById(id).value.trim());
+    const dlFilled = document.getElementById('p-addr1').value.trim();
+    const eFilled  = document.getElementById('e-status').value && document.getElementById('e-income').value;
+    const lFilled  = document.getElementById('l-amount').value || document.getElementById('l-monthly').value;
+    const consent  = document.getElementById('consent-check').checked;
+
+    const steps = [vFilled, pFilled, eFilled, lFilled, consent];
+    steps.forEach((done, i) => {
+      const stepEl = document.getElementById('step' + (i+1));
+      stepEl.classList.toggle('done', !!done);
+      stepEl.classList.toggle('active', !done && steps.slice(0, i).every(Boolean));
+    });
+    if (!steps.some((s,i) => !s && steps.slice(0,i).every(Boolean))) {
+      document.getElementById('step5').classList.add('active');
+    }
+  }
+
+  /* ── VALIDATION ── */
+  function validateForm() {
+    const required = [
+      { id: 'p-first',  msg: 'First name is required' },
+      { id: 'p-last',   msg: 'Last name is required' },
+      { id: 'p-dob',    msg: 'Date of birth is required' },
+      { id: 'p-ssn',    msg: 'SSN is required' },
+      { id: 'p-phone',  msg: 'Phone number is required' },
+      { id: 'p-email',  msg: 'Valid email is required' },
+      { id: 'p-dl',     msg: 'Driver\'s license is required' },
+      { id: 'p-addr1',  msg: 'Address is required' },
+      { id: 'p-city',   msg: 'City is required' },
+      { id: 'p-state',  msg: 'State is required' },
+      { id: 'p-zip',    msg: 'ZIP code is required' },
+      { id: 'e-status', msg: 'Employment status is required' },
+      { id: 'e-income', msg: 'Income is required' },
+      { id: 'e-interval', msg: 'Income interval is required' },
+    ];
+
+    let valid = true;
+    required.forEach(({ id, msg }) => {
+      const el = document.getElementById(id);
+      const group = el.closest('.f-group');
+      const errorMsg = group?.querySelector('.f-error-msg');
+      if (!el.value.trim()) {
+        if (group) group.classList.add('error');
+        if (errorMsg) errorMsg.textContent = msg;
+        if (valid) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        valid = false;
+      } else {
+        if (group) group.classList.remove('error');
+      }
+    });
+
+    if (!document.getElementById('consent-check').checked) {
+      document.getElementById('consent-check').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      alert('Please read and accept the authorization terms before submitting.');
+      valid = false;
+    }
+    return valid;
+  }
+
+  /* ── SUBMIT ── */
+  function submitApp(e) {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Submitting...';
+
+    // Simulate processing
+    setTimeout(() => {
+      // Save as lead in CRM
+      const leads = JSON.parse(localStorage.getItem('lutz_leads') || '[]');
+      const refNum = 'APEX-' + Date.now().toString().slice(-6);
+      leads.unshift({
+        id: Date.now(),
+        name: document.getElementById('p-first').value + ' ' + document.getElementById('p-last').value,
+        phone: document.getElementById('p-phone').value,
+        email: document.getElementById('p-email').value,
+        car: document.getElementById('v-vehicle').value || (document.getElementById('v-year').value + ' ' + document.getElementById('v-make').value + ' ' + document.getElementById('v-model').value) || 'Credit Application',
+        carPrice: document.getElementById('v-price').value ? '$' + parseInt(document.getElementById('v-price').value).toLocaleString() : '',
+        contactTime: 'Anytime',
+        message: 'Credit Application Submitted — Ref: ' + refNum,
+        date: new Date().toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'}),
+        status: 'hot',
+        notes: 'Income: $' + (document.getElementById('e-income').value||'N/A') + ' ' + (document.getElementById('e-interval').value||'') + ' | Down: $' + (document.getElementById('l-down').value||'0') + ' | Term: ' + (document.getElementById('l-term').value||'N/A'),
+      });
+      localStorage.setItem('lutz_leads', JSON.stringify(leads));
+
+      // Show success
+      document.getElementById('form-body').style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+      document.getElementById('success-ref').textContent = 'Reference Number: ' + refNum + ' · ' + new Date().toLocaleString();
+
+      // Mark all steps done
+      [1,2,3,4,5].forEach(i => {
+        const s = document.getElementById('step' + i);
+        s.classList.remove('active'); s.classList.add('done');
+        s.querySelector('.step-circle').textContent = '✓';
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 1800);
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>
